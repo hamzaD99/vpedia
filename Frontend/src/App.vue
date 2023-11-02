@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app :style="this.$i18n.locale === 'ar' ? 'direction: rtl !important;' : ''">
     <v-main>
       <v-snackbar location="top" top v-model="snackbar.show" timeout="3000">
         {{ snackbar.message }}
@@ -37,3 +37,16 @@ export default {
   }),
 }
 </script>
+
+<style>
+.rtl{
+  direction: rtl;
+  text-align: right;
+}
+
+/* Add a class for the English language */
+.ltr{
+  direction: ltr;
+  text-align: left;
+}
+</style>
