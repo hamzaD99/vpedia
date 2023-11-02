@@ -1,5 +1,6 @@
 const { getAllUsers } = require("./get.all.users.action");
-const { createUser } = require("./create.user.action")
+const { createUser } = require("./create.user.action");
+const { loginUser } = require("./login.user.action");
 
 module.exports = {
     '/': {
@@ -9,7 +10,13 @@ module.exports = {
         },
         post: {
             action: createUser,
-            level: 'member'
+            level: 'public'
         }
     },
+    '/login': {
+        post: {
+            action: loginUser,
+            level: 'public'
+        }
+    }
 }

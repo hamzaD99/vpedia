@@ -9,27 +9,16 @@ class User extends Sequelize.Model {
                     defaultValue: DataTypes.UUIDV4,
                     primaryKey: true,
                 },
-                name: {
-                    type: DataTypes.STRING,
-                    allowNull: false,
-                },
-                email: {
-                    type: DataTypes.STRING,
-                    allowNull: false,
-                    unique: true,
-                },
-                createdAt: {
-                    type: DataTypes.DATE,
-                    defaultValue: DataTypes.NOW,
-                    allowNull: false,
-                },
-                deletedAt: {
-                    type: DataTypes.DATE,
-                },
+                name: DataTypes.STRING,
+                email: DataTypes.STRING,
+                userName: DataTypes.STRING,
+                password: DataTypes.STRING,
+                roleId: DataTypes.INTEGER,
+                createdAt: DataTypes.DATE,
+                deletedAt: DataTypes.DATE
             },
             {
                 tableName: 'users',
-                timestamps: false,
                 sequelize,
             }
         );
