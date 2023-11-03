@@ -1,11 +1,13 @@
 import { createStore } from 'vuex';
 import createPersistedState from "vuex-persistedstate";
-import snackbarModule from './modules/snackbar';
+import snackbar from './modules/snackbar';
+import user from './modules/user';
 
 const store = createStore({
   plugins: [createPersistedState()],
   modules: {
-    snackbar: snackbarModule,
+    snackbar: snackbar,
+    user: user
   },
 });
 

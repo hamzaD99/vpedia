@@ -1,7 +1,8 @@
 @use 'vuetify/settings';
 
 .v-application {
-  font-family: 'Ubuntu' !important;
+  font-family: 'Cairo' !important;
+  color: #0c2d48 !important;
 }
 body{
   margin: 0 !important;
@@ -9,4 +10,7 @@ body{
 
 .v-locale--is-ltr {
   direction: unset !important;
+}
+h1{
+  font-weight: 500;
 }

@@ -1,0 +1,14 @@
+{
+    "Login": "تسجيل دخول",
+    "Username or Email": "اسم المستخدم أو البريد الالكتروني",
+    "This field is required": "هذا الحقل مطلوب",
+    "Password": "كلمة المرور",
+    "Password must be at least 8 characters": "كلمة المرور يجب أن تكون أكثر من 8 رموز",
+    "Password must contain an uppercase letter": "كلمة المرور يجب أن تحتوي على أحرف كبيرة",
+    "Password must contain an lowercase letter": "كلمة المرور يجب أن تحتوي على أحرف صغيرة",
+    "Password must contain a digit": "كلمة المرور يجب أن تحتوي على رقم",
+    "Password must contain a special character": "كلمة المرور يجب أن تحتوي على رمز خاص",
+    "Wrong Credentials": "معلومات خاطئة",
+    "Enter Email or Username and Password": "أدخل البريد الالكتروني أو اسم المستخدم وكلمة المرور",
+    "Something Went Wrong!": "حدث خطأ ما!"
+}

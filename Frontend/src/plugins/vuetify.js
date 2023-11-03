@@ -9,8 +9,8 @@ const mainLightTheme = {
   dark: false,
   colors: {
     background: '#F5F5F5',
-    primary: '#0075ca',
-    secondary: '#FFD700',
+    primary: '#2e8ac0',
+    secondary: '#2e8ac0',
     error: '#FF4444',
     info: '#5121F3',
     success: '#4CAF50',

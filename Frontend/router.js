@@ -1,26 +1,24 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import LoginPage from './src/views/LoginPage.vue'
-import RegistrationPage from './src/views/RegistrationPage.vue';
-import TermsPage from './src/views/TermsPage.vue';
-
+import FilmsPage from './src/views/FilmsPage.vue'
 const routes = [
-  {
-    path: '/register',
-    name: 'RegistrationPage',
-    component: RegistrationPage,
-    meta: { title: 'BrainBoost - Register' }
-  },
-  {
-    path: '/terms',
-    name: 'TermsPage',
-    component: TermsPage,
-    meta: { title: 'BrainBoost - Terms' }
-  },
+  // {
+  //   path: '/register',
+  //   name: 'RegistrationPage',
+  //   component: RegistrationPage,
+  //   meta: { title: 'BrainBoost - Register' }
+  // },
   {
     path: '/login',
     name: 'LoginPage',
     component: LoginPage,
-    meta: { title: 'BrainBoost - Login' }
+    meta: { title: 'تسجيل دخول - الموسوعة المرئية' }
+  },
+  {
+    path: '/films',
+    name: 'FilmsPage',
+    component: FilmsPage,
+    meta: { title: 'الأفلام - الموسوعة المرئية' }
   },
 ];
 
@@ -29,7 +27,7 @@ const router = createRouter({
   routes,
 });
 router.beforeEach((to, from, next) => {
-  document.title = to.meta.title || 'BrainBoost';
+  document.title = to.meta.title || 'الموسوعة المرئية';
   next();
 });
 export default router;
