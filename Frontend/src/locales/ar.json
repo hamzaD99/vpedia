@@ -10,5 +10,6 @@
     "Password must contain a special character": "كلمة المرور يجب أن تحتوي على رمز خاص",
     "Wrong Credentials": "معلومات خاطئة",
     "Enter Email or Username and Password": "أدخل البريد الالكتروني أو اسم المستخدم وكلمة المرور",
-    "Something Went Wrong!": "حدث خطأ ما!"
+    "Something Went Wrong!": "حدث خطأ ما!",
+    "Close": "إغلاق"
 }

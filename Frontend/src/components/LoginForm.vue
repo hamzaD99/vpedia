@@ -60,7 +60,7 @@ export default {
                 this.$router.push("/films")
             })
             .catch((err) => {
-                this.$store.dispatch('showSnackbar',{ message: this.$t(err.response && err.response.data ? err.response.data.error  : 'Something Went Wrong!') })
+                this.$error(err, err.response && err.response.data ? err.response.data.error  : null)
             })
             .finally(() => {
                 this.loginLoading = false

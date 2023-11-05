@@ -2,7 +2,9 @@ import { createRouter, createWebHistory } from 'vue-router';
 import LoginPage from './src/views/LoginPage.vue'
 import FilmsPage from './src/views/FilmsPage.vue'
 import { isLoggedin, isGuest } from './middleware'
+import i18n from './src/i18n'
 
+console.log(i18n)
 const routes = [
   {
     path: '/login',

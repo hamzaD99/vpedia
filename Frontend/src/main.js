@@ -10,6 +10,9 @@ import i18n from './i18n'
 
 const axiosInstance = axios.create({
   baseURL: 'http://localhost:3000/',
+  headers: {
+    Authorization: `Bearer ${store.getters.token}`
+  }
 });
 
 loadFonts()
@@ -43,3 +46,9 @@ const validationRules = {
   ]
 }
 app.config.globalProperties.$rules = {...validationRules}
+
+const error = (err, message="Something Went Wrong!") =>{
+  console.error(err)
+  store.dispatch('showSnackbar',{ message: app._instance.ctx.$t(message) })
+}
+app.config.globalProperties.$error = error

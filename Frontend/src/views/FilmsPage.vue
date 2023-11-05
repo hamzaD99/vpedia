@@ -16,5 +16,14 @@ export default {
       user: 'user'
     })
   },
+  created(){
+    this.$axios.get("/users")
+    .then((res)=>{
+      console.log(res)
+    })
+    .catch((err)=>{
+      this.$error(err)
+    })
+  }
 }
 </script>

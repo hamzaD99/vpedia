@@ -1,11 +1,11 @@
 <template>
   <v-app :style="this.$i18n.locale === 'ar' ? 'direction: rtl !important;' : ''">
     <v-main>
-      <v-snackbar location="top" top v-model="snackbar.show" timeout="4000">
+      <v-snackbar location="top" top v-model="snackbar.show" :style="this.$i18n.locale === 'ar' ? 'direction: rtl !important;' : ''">
         {{ snackbar.message }}
         <template v-slot:actions>
           <v-btn color="primary" variant="text" @click="$store.dispatch('hideSnackbar')">
-            Close
+            {{ $t('Close') }}
           </v-btn>
         </template>
       </v-snackbar>

@@ -21,7 +21,6 @@ const isValidToken = (req) => {
     try {
         token = token.split(" ")[1]
         const decoded = jwt.verify(token, constents.JWT_SECERT);
-        console.log(decoded)
         req.user = decoded;
         return true
     } catch (error) {
