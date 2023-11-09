@@ -8,7 +8,8 @@ import { createVuetify } from 'vuetify'
 const mainLightTheme = {
   dark: false,
   colors: {
-    background: '#F5F5F5',
+    background: '#FFFFFF',
+    secondaryBackground: '#F5F5F5',
     primary: '#2e8ac0',
     secondary: '#2e8ac0',
     error: '#FF4444',

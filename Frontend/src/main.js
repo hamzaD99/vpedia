@@ -15,8 +15,21 @@ const axiosInstance = axios.create({
   }
 });
 
-loadFonts()
+axiosInstance.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      store.dispatch('logout')
+      router.push('/')
+    }
+    return error;
+  }
+);
 
+
+loadFonts()
 const app = createApp(App)
 app.use(i18n)
 app.use(vuetify)

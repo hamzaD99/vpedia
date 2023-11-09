@@ -1,5 +1,6 @@
 {
     "Login": "تسجيل دخول",
+    "Logout": "تسجيل خروج",
     "Username or Email": "اسم المستخدم أو البريد الالكتروني",
     "This field is required": "هذا الحقل مطلوب",
     "Password": "كلمة المرور",
@@ -11,5 +12,11 @@
     "Wrong Credentials": "معلومات خاطئة",
     "Enter Email or Username and Password": "أدخل البريد الالكتروني أو اسم المستخدم وكلمة المرور",
     "Something Went Wrong!": "حدث خطأ ما!",
-    "Close": "إغلاق"
+    "Close": "إغلاق",
+    "Vpedia": "الموسوعة المرئية",
+    "Home": "الرئيسية",
+    "Films": "الأفلام",
+    "Category": "التخصص",
+    "About Us": "من نحن",
+    "Contact Us": "تواصل معنا"
 }

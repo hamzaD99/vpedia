@@ -17,13 +17,13 @@ export default {
     })
   },
   created(){
-    this.$axios.get("/users")
-    .then((res)=>{
-      console.log(res)
-    })
-    .catch((err)=>{
-      this.$error(err)
-    })
+    // this.$axios.get("/users")
+    // .then((res)=>{
+    //   console.log(res)
+    // })
+    // .catch((err)=>{
+    //   this.$error(err)
+    // })
   }
 }
 </script>
