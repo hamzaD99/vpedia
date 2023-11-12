@@ -26,8 +26,8 @@ export default createVuetify(
       defaultTheme: 'mainLightTheme',
       variations: {
         colors: ['primary', 'secondary'],
-        lighten: 2,
-        darken: 2,
+        lighten: 3,
+        darken: 3,
       },
       themes: {
         mainLightTheme,

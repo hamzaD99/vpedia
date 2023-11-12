@@ -1,6 +1,9 @@
 <template>
   <v-app :style="this.$i18n.locale === 'ar' ? 'direction: rtl !important;' : ''">
     <v-main>
+      
+      <NavBar v-if="!$route.meta.hideHeaderFooter" />
+
       <v-snackbar location="top" top v-model="snackbar.show" :style="this.$i18n.locale === 'ar' ? 'direction: rtl !important;' : ''">
         {{ snackbar.message }}
         <template v-slot:actions>
@@ -9,7 +12,12 @@
           </v-btn>
         </template>
       </v-snackbar>
-      <router-view></router-view>
+      <router-view style="min-height: calc(100vh - 174px);"></router-view>
+
+      <v-footer v-if="!$route.meta.hideHeaderFooter" style="padding: 0;">
+        <TheFooter />
+      </v-footer>
+
     </v-main>
   </v-app>
 </template>
@@ -17,9 +25,15 @@
 <script>
 
 import { mapGetters } from 'vuex';
+import NavBar from './components/NavBar.vue'
+import TheFooter from './components/TheFooter.vue'
 
 export default {
   name: 'App',
+  components:{
+    NavBar,
+    TheFooter
+  },
   computed:{
     ...mapGetters({
 			snackbar: 'snackbar',
@@ -32,8 +46,6 @@ export default {
       },
       deep: true
     }
-  },
-  data: () => ({
-  }),
+  }
 }
 </script>
