@@ -7,6 +7,7 @@ import router from '../router'
 import axios from 'axios';
 import store from './store/store'
 import i18n from './i18n'
+import VueNumber from 'vue-number-animation'
 
 const axiosInstance = axios.create({
   baseURL: 'http://localhost:3000/',
@@ -35,16 +36,17 @@ app.use(i18n)
 app.use(vuetify)
 app.use(router)
 app.use(store)
+app.use(VueNumber)
 app.mount('#app')
 app.config.globalProperties.$axios = { ...axiosInstance }
 
 const validationRules = {
   nameRules: [
-    value => !!value || 'Name is required',
+    value => !!value || app._instance.ctx.$t('Name is required'),
   ],
   emailRules: [
-    (value) => !!value || 'Email is required',
-    (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) || 'E-mail must be valid'
+    (value) => !!value || app._instance.ctx.$t('Email is required'),
+    (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) || app._instance.ctx.$t('Email must be valid')
   ],
   passwordRules: [
     (value) => !!value || app._instance.ctx.$t('This field is required'),

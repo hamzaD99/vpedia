@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import LoginPage from './src/views/LoginPage.vue'
 import FilmsPage from './src/views/FilmsPage.vue'
 import HomePage from './src/views/HomePage.vue'
+import AboutUsPage from './src/views/AboutUsPage.vue'
 import { isLoggedin, isGuest } from './middleware'
 import i18n from './src/i18n'
 
@@ -16,7 +17,13 @@ const routes = [
     path: '/films',
     name: 'FilmsPage',
     component: FilmsPage,
-    meta: { title: `${i18n.global.t('Films')} - ${i18n.global.t('Vpedia')}`, middleware: isLoggedin }
+    meta: { title: `${i18n.global.t('Films')} - ${i18n.global.t('Vpedia')}` }
+  },
+  {
+    path: '/about-us',
+    name: 'AboutUsPage',
+    component: AboutUsPage,
+    meta: { title: `${i18n.global.t('About Us')} - ${i18n.global.t('Vpedia')}` }
   },
   {
     path: '/',

@@ -12,7 +12,7 @@
           </v-btn>
         </template>
       </v-snackbar>
-      <router-view style="min-height: calc(100vh - 174px);"></router-view>
+      <router-view style="min-height: calc(100vh - 186px);"></router-view>
 
       <v-footer v-if="!$route.meta.hideHeaderFooter" style="padding: 0;">
         <TheFooter />
