@@ -9,12 +9,12 @@
         </v-row>
         <v-row justify="center" style="width: 100%;">
             <v-col cols="5">
-                <InputField :rules="$rules.loginHandleRules" v-model="loginHandle" :name="$t('Username or Email')" star />
+                <InputField :rules="$rules.requiredRule" v-model="loginHandle" :name="$t('Username or Email')" star />
             </v-col>
         </v-row>
         <v-row justify="center" style="width: 100%;">
             <v-col cols="5">
-                <InputField type="password" :rules="$rules.loginHandleRules" v-model="password" :name="$t('Password')" star />
+                <InputField type="password" :rules="$rules.requiredRule" v-model="password" :name="$t('Password')" star />
             </v-col>
         </v-row>
         <v-row justify="center" style="width: 100%;">
@@ -35,7 +35,7 @@ export default {
     },
     computed: {
         isRegisterDisabled() {
-            return this.$rules.loginHandleRules.some(rule => rule(this.loginHandle) !== true)
+            return this.$rules.requiredRule.some(rule => rule(this.loginHandle) !== true)
         }
     },
     data: () => ({

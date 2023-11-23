@@ -56,7 +56,7 @@ const validationRules = {
     (value) => /\d/.test(value) || app._instance.ctx.$t('Password must contain a digit'),
     (value) => /[!@#$%^&*]/.test(value) || app._instance.ctx.$t('Password must contain a special character'),
   ],
-  loginHandleRules: [
+  requiredRule: [
     (value) => !!value || app._instance.ctx.$t('This field is required'),
   ]
 }

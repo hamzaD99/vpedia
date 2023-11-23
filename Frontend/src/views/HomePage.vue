@@ -96,15 +96,15 @@
         <v-col cols="7" class="d-flex flex-column">
           <h3 class="mb-4" style="color: rgb(var(--v-theme-primary-darken-3));">{{ $t('Send us a message') }}</h3>
           <!-- Form -->
-          <div class="d-flex flex-column">
+          <div class="d-flex flex-column" style="row-gap: 7px;">
             <div class="d-flex align-center" style="column-gap: 10px;">
               <InputField style="width: 33%;" :rules="$rules.nameRules" v-model="name" :name="$t('Name')" star label />
               <InputField style="width: 33%;" :rules="$rules.emailRules" v-model="email" :name="$t('Email')" label />
               <InputField style="width: 33%;" v-model="phone" :name="$t('Phone Number')" label />
             </div>
-            <InputField style="width: 100%;" v-model="subject" :name="$t('Subject')" label />
-            <InputField style="width: 100%; height: 400px;" v-model="message" :name="$t('Message')" label />
-            <v-btn style="height: 50px;width: fit-content;margin-top: -150px;" color="primary-darken-2">{{ $t('Send') }}</v-btn>
+            <InputField style="width: 100%;" :rules="$rules.requiredRule" v-model="subject" :name="$t('Subject')" label />
+            <InputField style="width: 100%; height: 400px;" :rules="$rules.requiredRule" v-model="message" :name="$t('Message')" label />
+            <v-btn :disabled="isSendDisabled" :loading="sendLoading" style="height: 50px;width: fit-content;margin-top: -150px;" color="primary-darken-2" @click="sendMessage">{{ $t('Send') }}</v-btn>
           </div>
         </v-col>
         <v-col cols="3" class="d-flex flex-column">
@@ -154,6 +154,7 @@ export default {
       phone: null,
       subject: null,
       message: null,
+      sendLoading: false,
       numbers: [
         {
           from: 10000,
@@ -181,6 +182,11 @@ export default {
   created() {
     this.getSeries()
   },
+  computed: {
+    isSendDisabled(){
+      return this.$rules.nameRules.some(rule => rule(this.name) !== true) || this.$rules.emailRules.some(rule => rule(this.email) !== true) || this.$rules.requiredRule.some(rule => rule(this.subject) !== true) || this.$rules.requiredRule.some(rule => rule(this.message) !== true)
+    }
+  },
   methods: {
     getSeries() {
       this.seriesLoading = true;
@@ -192,16 +198,36 @@ export default {
           }
         }
       })
-        .then((res) => {
-          this.seriesList = res.data
-          console.log(this.seriesList)
-        })
-        .catch((err) => {
-          this.$error(err)
-        })
-        .finally(() => {
-          this.seriesLoading = false;
-        })
+      .then((res) => {
+        this.seriesList = res.data
+        console.log(this.seriesList)
+      })
+      .catch((err) => {
+        this.$error(err)
+      })
+      .finally(() => {
+        this.seriesLoading = false;
+      })
+    },
+    sendMessage(){
+      this.sendLoading = true;
+      this.$axios.post("/contact_us", {
+        name: this.name,
+        email: this.email,
+        phone: this.phone,
+        subject: this.subject,
+        message: this.message,
+      })
+      .then((res) => {
+        console.log(res)
+        this.$store.dispatch('showSnackbar',{ message: this.$t('Your message has been sent successfuly!') })
+      })
+      .catch((err) => {
+        this.$error(err)
+      })
+      .finally(() => {
+        this.sendLoading = false;
+      })
     },
     playAnimation() {
       this.$refs.numberElements.map((numberElement) =>{
