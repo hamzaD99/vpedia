@@ -48,7 +48,7 @@ export default {
       { name: 'Home', path: 'HomePage' },
       { name: 'Films', path: 'FilmsPage' },
       { name: 'Category', path: 'FilmsPage' },
-      { name: 'About Us', path: 'FilmsPage' },
+      { name: 'About Us', path: 'AboutUsPage' },
       { name: 'Contact Us', path: 'FilmsPage' },
     ]
   }),

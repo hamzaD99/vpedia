@@ -1,7 +1,7 @@
 <template>
     <div class="d-flex flex-column align-center pb-2" style="row-gap: 10px; border: 1px solid #ccc!important;">
         <router-link style="width: 100%;" :to="path">
-        <v-img style="cursor: pointer;" width="300px"
+        <v-img style="cursor: pointer;width: 100%;"
         :src="image ? image : require('@/assets/default-series.jpg')" @mouseover="showOverlay = true"
         @mouseout="showOverlay = false">
             <div class="overlay" :class="showOverlay ? 'overlay__active' : ''"></div>
@@ -35,7 +35,7 @@ export default {
         image: {
             type: String,
             required: false
-        },
+        }
     },
     data: () => ({
         showOverlay: false

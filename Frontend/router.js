@@ -3,6 +3,7 @@ import LoginPage from './src/views/LoginPage.vue'
 import FilmsPage from './src/views/FilmsPage.vue'
 import HomePage from './src/views/HomePage.vue'
 import AboutUsPage from './src/views/AboutUsPage.vue'
+import SeriesPage from './src/views/SeriesPage.vue'
 import { isLoggedin, isGuest } from './middleware'
 import i18n from './src/i18n'
 
@@ -23,6 +24,12 @@ const routes = [
     path: '/about-us',
     name: 'AboutUsPage',
     component: AboutUsPage,
+    meta: { title: `${i18n.global.t('About Us')} - ${i18n.global.t('Vpedia')}` }
+  },
+  {
+    path: '/series/:slug',
+    name: 'SeriesPage',
+    component: SeriesPage,
     meta: { title: `${i18n.global.t('About Us')} - ${i18n.global.t('Vpedia')}` }
   },
   {

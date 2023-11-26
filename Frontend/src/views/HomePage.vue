@@ -51,7 +51,7 @@
         <v-col v-else v-for="series in seriesList" :key="series.UUID" cols="3">
           <MovieCard :name="$i18n.locale === 'ar' ? series.name_arabic : series.name_english"
             :description="$i18n.locale === 'ar' ? series.description_arabic : series.description_english"
-            :path="`/series/${series.slug}`" :image="series.image" />
+            :path="`/series/${series.slug}`" :image="series.image"/>
         </v-col>
       </v-row>
       <v-row justify="center" style="width: 85%;" class="mb-1 mt-5">
