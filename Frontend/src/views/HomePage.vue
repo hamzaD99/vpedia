@@ -4,8 +4,8 @@
     <v-container fluid class="pa-0">
       <v-row style="height: 525px; overflow: hidden;">
         <v-col cols="12" class="pa-1">
-          <v-img class="image-transition" :src="require(`@/assets/Banner-01.jpg`)">
-            <div style="display: flex;height: 525px;align-items: center;justify-content: center;">
+          <v-img style="width: 100%; height: 525px;" cover="contain" class="image-transition" :src="require(`@/assets/Banner-01.jpg`)">
+            <div class="text-center" style="display: flex;height: 525px;align-items: center;justify-content: center;">
               <h1 style="color: white; font-size: 55px;">
                 {{ $t("Vpedia") }}
               </h1>
@@ -14,9 +14,10 @@
         </v-col>
       </v-row>
     </v-container>
+
+
     <!-- About us -->
     <v-container class="pa-0 d-flex flex-column align-center justify-center">
-      <!-- About Us -->
       <v-row justify="center" style="width: 85%;" class="mb-1 mt-5">
         <v-col cols="12" class="d-flex align-center">
           <v-divider />
@@ -25,10 +26,10 @@
         </v-col>
       </v-row>
       <v-row justify="center" style="width: 100%;column-gap: 95px" class="ma-0">
-        <v-col cols="3">
+        <v-col md="3" sm="5" cols="8">
           <v-img width="340px" class="image-transition" :src="require('@/assets/logo.png')" />
         </v-col>
-        <v-col cols="6" class="d-flex flex-column" style="row-gap: 20px;">
+        <v-col md="6" sm="8" cols="12" class="align-center align-md-start d-flex flex-column px-6 px-md-0" style="row-gap: 20px;">
           <p>
           {{ $t('We are the leading private media institution in the Arab world that specializes in educational documentary film series of various types, from cultural, historical and scientific. For this purpose, we employ a group of distinguished media professionals, with extensive competencies and experience, each in his field. Our organization has produced a wide range of educational visual materials that have won awards in Arab festivals') }}
           </p>
@@ -37,6 +38,8 @@
           </router-link>
         </v-col>
       </v-row>
+
+
       <!-- Most Wastshed Movies -->
       <v-row justify="center" style="width: 85%;" class="mb-1 mt-5">
         <v-col cols="12" class="d-flex align-center">
@@ -48,7 +51,7 @@
       </v-row>
       <v-row style="width: 85%;" class="mb-10 d-flex justify-center">
         <v-progress-circular v-if="seriesLoading" indeterminate color="primary" />
-        <v-col v-else v-for="series in seriesList" :key="series.UUID" cols="3">
+        <v-col v-else v-for="series in seriesList" :key="series.UUID" md="3" sm="6" cols="12">
           <MovieCard :name="$i18n.locale === 'ar' ? series.name_arabic : series.name_english"
             :description="$i18n.locale === 'ar' ? series.description_arabic : series.description_english"
             :path="`/series/${series.slug}`" :image="series.image"/>
@@ -61,19 +64,21 @@
         </router-link>
       </v-row>
     </v-container>
+
+
     <!-- Numbers -->
     <v-container class="my-8 pa-0" style="max-width: 100% !important; height: 400px;" ref="numbers">
       <v-row style="height: 100%; overflow: hidden;">
         <v-col cols="12" class="pa-1">
-          <v-img class="image-transition" :src="require(`@/assets/Numbers-Background.jpg`)">
-            <div class="align-center d-flex flex-column justify-center" style="height: 400px;color: white; background-color: rgba(0,0,0,0.7); row-gap: 50px;">
-              <div class="d-flex align-center mb-2" style="width: 70%;">
+          <v-img cover="contain" style="width:100%;" class="image-transition" :src="require(`@/assets/Numbers-Background.jpg`)">
+            <div class="align-center d-flex flex-column justify-center" cover="contain" style="width:100%;height: 400px;color: white; background-color: rgba(0,0,0,0.7); row-gap: 50px;">
+              <div class="d-flex align-center mb-2" :style="$vuetify.display.mdAndUp ? 'width: 70%' : 'width: 85%'">
                 <v-divider class="border-opacity-100" color="white" />
                 <h1 style="text-wrap: nowrap;color: white;" class="mx-5">{{ $t('Insights') }}</h1>
                 <v-divider class="border-opacity-100" color="white" />
               </div>
-              <div class="d-flex justify-space-around" style="width: 70%;">
-                <div v-for="number in numbers" :key="number.text" class="d-flex flex-column align-center">
+              <div class="d-flex justify-space-around" style="width: 70%; flex-wrap: wrap;">
+                <div v-for="number in numbers" :key="number.text" class="d-flex flex-column align-center mx-3">
                   <number style="font-size: 40px; direction: ltr !important;" animationPaused ref="numberElements" :from="number.from" :to="number.to" :duration="1" easing="Power1.easeIn" :format="fromatNumber" />
                   <span>{{ $t(number.text) }}</span>
                 </div>
@@ -83,7 +88,9 @@
         </v-col>
       </v-row>
     </v-container>
-    <!-- Contact US -->
+
+
+    <!-- Contact Us -->
     <v-container class="pa-0 d-flex flex-column align-center justify-center">
       <v-row justify="center" style="width: 85%;" class="mb-1 mt-5">
         <v-col cols="12" class="d-flex align-center">
@@ -93,7 +100,7 @@
         </v-col>
       </v-row>
       <v-row justify="space-between" style="width: 85%;" class="mb-1 mt-5">
-        <v-col cols="7" class="d-flex flex-column">
+        <v-col cols="12" md="7" class="d-flex flex-column">
           <h3 class="mb-4" style="color: rgb(var(--v-theme-primary-darken-3));">{{ $t('Send us a message') }}</h3>
           <!-- Form -->
           <div class="d-flex flex-column" style="row-gap: 7px;">
@@ -107,7 +114,7 @@
             <v-btn :disabled="isSendDisabled" :loading="sendLoading" style="height: 50px;width: fit-content;margin-top: -150px;" color="primary-darken-2" @click="sendMessage">{{ $t('Send') }}</v-btn>
           </div>
         </v-col>
-        <v-col cols="3" class="d-flex flex-column">
+        <v-col cols="12" md="3" class="d-flex flex-column">
           <h3 class="mb-7" style="color: rgb(var(--v-theme-primary-darken-3));">{{ $t('Contact information') }}</h3>
           <div class="d-flex align-center" style="column-gap: 10px;">
             <v-btn
