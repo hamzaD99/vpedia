@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
 
-class Series extends Sequelize.Model {
+class Film extends Sequelize.Model {
     static init(sequelize, DataTypes) {
         return super.init(
             {
@@ -13,23 +13,25 @@ class Series extends Sequelize.Model {
                 name_english: DataTypes.STRING,
                 description_arabic: DataTypes.STRING,
                 description_english: DataTypes.STRING,
-                image: DataTypes.STRING,
-                slug: DataTypes.STRING,
+                reviewer_arabic: DataTypes.STRING,
+                reviewer_english: DataTypes.STRING,
+                film_link: DataTypes.STRING,
+                series_id: DataTypes.UUID,
                 createdAt: DataTypes.DATE,
                 deletedAt: DataTypes.DATE,
                 updatedAt: DataTypes.DATE
             },
             {
-                tableName: 'series',
+                tableName: 'films',
                 sequelize,
             }
         );
     }
 
     static associate(models) {
-        this.myAssociations = this.hasMany(models.Film, { foreignKey: 'series_id', as: 'Films' })
+        this.myAssociations = this.belongsTo(models.Series, { foreignKey: 'series_id' });
     }
 
 }
 
-module.exports = Series;
+module.exports = Film;

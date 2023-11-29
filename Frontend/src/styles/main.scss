@@ -4,13 +4,24 @@
   font-family: 'Cairo' !important;
   color: #0c2d48 !important;
 }
-body{
+
+body {
   margin: 0 !important;
 }
 
 .v-locale--is-ltr {
   direction: unset !important;
 }
-h1{
+
+h1 {
   font-weight: 500;
+}
+.v-expansion-panel-title{
+  font-size: 19px !important;
+  height: 75px;
+  display: flex;
+  border: 1px solid rgba(128, 128, 128, 0.621);
+}
+.v-expansion-panel__shadow{
+  box-shadow: none !important;
 }

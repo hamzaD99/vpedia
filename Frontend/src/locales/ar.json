@@ -39,5 +39,11 @@
     "Email is required": "البريد الالكتروني مطلوب",
     "Email must be valid": "أدخل بريد صحيح",
     "Send": "أرسل",
-    "Your message has been sent successfuly!": "تم إرسال الرسالة بنجاح!"
+    "Your message has been sent successfuly!": "تم إرسال الرسالة بنجاح!",
+    "Content": "المحتوى",
+    "out of": "من أصل",
+    "Film": "فيلم",
+    "Enter more than 2 letters": "ادخل أكثر من حرفين",
+    "Page number": "الصفحة رقم",
+    "Pages": "صفحات"
 }
