@@ -28,7 +28,9 @@
                 </div>
                 <div v-else v-for="film in films" :key="film.UUID" style="width: 100%;" class="px-16">
                   <div class="d-flex justify-space-between" style="width: 100%;">
-                    <h3>{{ $i18n.locale === 'ar' ? film.name_arabic : film.name_english }}</h3>
+                    <router-link :style="this.hasAccessVar ? 'color: rgb(var(--v-theme-primary));text-decoration: none;' : 'pointer-events: none;text-decoration: none;color: black;'" :to="this.hasAccessVar ? `/film/${film.slug}` : ''">
+                      <h3>{{ $i18n.locale === 'ar' ? film.name_arabic : film.name_english }}</h3>
+                    </router-link>
                     <div style="height: 20px; width: 40px; background-color: blue;">j</div>
                   </div>
                   <v-divider class="mt-5 mb-5" />
@@ -53,6 +55,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'SeriesComponent',
@@ -67,7 +70,8 @@ export default {
       filmsLoading: false,
       searchValue: null,
       panel: null,
-      nameFilter: null
+      nameFilter: null,
+      hasAccessVar: false
     }
   },
   mounted() {
@@ -79,9 +83,15 @@ export default {
       required: true
     }
   },
+  computed: {
+    ...mapGetters({
+      user: 'user'
+    })
+  },
   async created() {
     await this.getSeriesBySlug()
     await this.getFilms()
+    this.hasAccess()
   },
   methods: {
     async getSeriesBySlug() {
@@ -89,6 +99,7 @@ export default {
       await this.$axios.get(`/series/${this.slug}`)
         .then((res) => {
           this.series = res.data
+          if(!this.series) this.$router.push('/films')
           document.title = `${this.$i18n.locale === 'ar' ? this.series.name_arabic : this.series.name_english} - ${this.$t('Vpedia')}`;
           console.log(this.series)
         })
@@ -141,6 +152,14 @@ export default {
         this.page = 1
         this.getFilms()
       }
+    },
+    hasAccess(){
+      if(Object.keys(this.user).length === 0){
+        this.hasAccessVar = false
+        return
+      }
+      const series_ids = this.user.Series_access.map((access) => access.series_id)
+      this.hasAccessVar =  series_ids.includes(this.series.UUID)
     }
   }
 }

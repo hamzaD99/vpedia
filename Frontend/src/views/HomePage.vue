@@ -4,7 +4,7 @@
     <v-container fluid class="pa-0">
       <v-row style="height: 525px; overflow: hidden;">
         <v-col cols="12" class="pa-1">
-          <v-img style="width: 100%; height: 525px;" cover="contain" class="image-transition" :src="require(`@/assets/Banner-01.jpg`)">
+          <v-img style="width: 100%; height: 525px;" cover class="image-transition" :src="require(`@/assets/Banner-01.jpg`)">
             <div class="text-center" style="display: flex;height: 525px;align-items: center;justify-content: center;">
               <h1 style="color: white; font-size: 55px;">
                 {{ $t("Vpedia") }}
@@ -70,8 +70,8 @@
     <v-container class="my-8 pa-0" style="max-width: 100% !important; height: 400px;" ref="numbers">
       <v-row style="height: 100%; overflow: hidden;">
         <v-col cols="12" class="pa-1">
-          <v-img cover="contain" style="width:100%;" class="image-transition" :src="require(`@/assets/Numbers-Background.jpg`)">
-            <div class="align-center d-flex flex-column justify-center" cover="contain" style="width:100%;height: 400px;color: white; background-color: rgba(0,0,0,0.7); row-gap: 50px;">
+          <v-img cover style="width:100%;" class="image-transition" :src="require(`@/assets/Numbers-Background.jpg`)">
+            <div class="align-center d-flex flex-column justify-center" cover style="width:100%;height: 400px;color: white; background-color: rgba(0,0,0,0.7); row-gap: 50px;">
               <div class="d-flex align-center mb-2" :style="$vuetify.display.mdAndUp ? 'width: 70%' : 'width: 85%'">
                 <v-divider class="border-opacity-100" color="white" />
                 <h1 style="text-wrap: nowrap;color: white;" class="mx-5">{{ $t('Insights') }}</h1>
@@ -207,7 +207,6 @@ export default {
       })
       .then((res) => {
         this.seriesList = res.data
-        console.log(this.seriesList)
       })
       .catch((err) => {
         this.$error(err)
@@ -226,7 +225,6 @@ export default {
         message: this.message,
       })
       .then((res) => {
-        console.log(res)
         this.$store.dispatch('showSnackbar',{ message: this.$t('Your message has been sent successfuly!') })
       })
       .catch((err) => {

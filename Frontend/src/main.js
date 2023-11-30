@@ -10,11 +10,18 @@ import i18n from './i18n'
 import VueNumber from 'vue-number-animation'
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:3000/',
-  headers: {
-    Authorization: `Bearer ${store.getters.token}`
-  }
+  baseURL: 'http://localhost:3000/'
 });
+
+axiosInstance.interceptors.request.use(
+  (config) => {
+    const token = store.getters.token;
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+);
 
 axiosInstance.interceptors.response.use(
   (response) => {

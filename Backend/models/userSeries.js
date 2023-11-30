@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
 
-class Film extends Sequelize.Model {
+class UserSeries extends Sequelize.Model {
     static init(sequelize, DataTypes) {
         return super.init(
             {
@@ -9,30 +9,25 @@ class Film extends Sequelize.Model {
                     defaultValue: DataTypes.UUIDV4,
                     primaryKey: true,
                 },
-                name_arabic: DataTypes.STRING,
-                name_english: DataTypes.STRING,
-                description_arabic: DataTypes.STRING,
-                description_english: DataTypes.STRING,
-                reviewer_arabic: DataTypes.STRING,
-                reviewer_english: DataTypes.STRING,
-                film_link: DataTypes.STRING,
-                slug: DataTypes.STRING,
+                user_id: DataTypes.UUID,
                 series_id: DataTypes.UUID,
+                expiredAt: DataTypes.DATE,
                 createdAt: DataTypes.DATE,
                 deletedAt: DataTypes.DATE,
                 updatedAt: DataTypes.DATE
             },
             {
-                tableName: 'films',
+                tableName: 'user_series',
                 sequelize,
             }
         );
     }
 
     static associate(models) {
-        this.myAssociations = this.belongsTo(models.Series, { foreignKey: 'series_id', as: 'Series' });
+        this.myAssociations = this.belongsTo(models.Series, { foreignKey: 'series_id', as: 'Series' })
+        this.myAssociations = this.belongsTo(models.User, { foreignKey: 'user_id', as: 'User' })
     }
 
 }
 
-module.exports = Film;
+module.exports = UserSeries;

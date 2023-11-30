@@ -28,6 +28,7 @@ class Series extends Sequelize.Model {
 
     static associate(models) {
         this.myAssociations = this.hasMany(models.Film, { foreignKey: 'series_id', as: 'Films' })
+        this.myAssociations = this.hasMany(models.UserSeries, { foreignKey: 'series_id', as: 'Users_access' })
     }
 
 }
