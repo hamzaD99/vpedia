@@ -1,6 +1,8 @@
 const models = require('../../models')
 const Category = models.Category
+const SubCategory = models.SubCategory
 const CategoryFilm = models.CategoryFilm
+const SubCategoryFilm = models.SubCategoryFilm
 const Film = models.Film
 const Series = models.Series
 const User = models.User
@@ -11,6 +13,7 @@ module.exports.getFilmsBySlug = async (req, res) => {
     const { slug } = req.params
     const includeSeries = req.query.includeSeries == 'true'
     const includeCategories = req.query.includeCategories == 'true'
+    const includeSubCategories = req.query.includeSubCategories == 'true'
     
     let userFound = await User.findOne({
         where: handler,
@@ -37,6 +40,16 @@ module.exports.getFilmsBySlug = async (req, res) => {
             include: [{
                 model: Category,
                 as: 'Category'
+            }]
+        })
+    }
+    if(includeSubCategories){
+        includes.push({
+            model: SubCategoryFilm,
+            as: 'SubCategories',
+            include: [{
+                model: SubCategory,
+                as: 'SubCategory'
             }]
         })
     }

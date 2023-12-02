@@ -32,6 +32,7 @@ class Film extends Sequelize.Model {
     static associate(models) {
         this.myAssociations = this.belongsTo(models.Series, { foreignKey: 'series_id', as: 'Series' });
         this.myAssociations = this.hasMany(models.CategoryFilm, { foreignKey: 'film_id', as: 'Categories' });
+        this.myAssociations = this.hasMany(models.SubCategoryFilm, { foreignKey: 'film_id', as: 'SubCategories' });
     }
 
 }

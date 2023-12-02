@@ -31,7 +31,9 @@
                     <router-link :style="this.hasAccessVar ? 'color: rgb(var(--v-theme-primary));text-decoration: none;' : 'pointer-events: none;text-decoration: none;color: black;'" :to="this.hasAccessVar ? `/film/${film.slug}` : ''">
                       <h3>{{ $i18n.locale === 'ar' ? film.name_arabic : film.name_english }}</h3>
                     </router-link>
-                    <div style="height: 20px; width: 40px; background-color: blue;">j</div>
+                    <div class="d-flex" style="column-gap: 10px;">
+                      <div style="padding: 10px;background: gainsboro;color: black;border-radius: 5px;" v-for="category in film.Categories" :key="category.UUID">{{ $i18n.locale === 'ar' ? category.Category.name_arabic : category.Category.name_english }}</div>
+                    </div>
                   </div>
                   <v-divider class="mt-5 mb-5" />
                 </div>

@@ -13,8 +13,14 @@
         <span class="mb-4">{{ $i18n.locale === 'ar' ? film.description_arabic : film.description_english }}</span>
         <span v-if="film.reviewer_arabic || film.reviewer_english" class="mb-2" style="color: rgb(var(--v-theme-primary));font-weight: bold;">{{ $t('Scientific Reviewer') }}:</span>
         <span class="mb-4" v-if="film.reviewer_arabic || film.reviewer_english">{{ $i18n.locale === 'ar' ? film.reviewer_arabic : film.reviewer_english }}</span>
-        <span class="mb-4" style="color: rgb(var(--v-theme-primary));font-weight: bold;">{{ $t('Main Category') }}:</span>
-        <span style="color: rgb(var(--v-theme-primary));font-weight: bold">{{ $t('Sub Categories') }}:</span>
+        <span class="mb-2" style="color: rgb(var(--v-theme-primary));font-weight: bold;">{{ $t('Main Category') }}:</span>
+        <div class="d-flex mb-4" style="column-gap: 18px;">
+          <div style="padding: 10px;background: gainsboro;color: black;border-radius: 5px;" v-for="category in film.Categories" :key="category.UUID">{{ $i18n.locale === 'ar' ? category.Category.name_arabic : category.Category.name_english }}</div>
+        </div>
+        <span class="mb-2" style="color: rgb(var(--v-theme-primary));font-weight: bold">{{ $t('Sub Categories') }}:</span>
+        <div class="d-flex mb-4" style="column-gap: 18px;">
+          <div style="padding: 10px;background: gainsboro;color: black;border-radius: 5px;" v-for="subCategory in film.SubCategories" :key="subCategory.UUID">{{ $i18n.locale === 'ar' ? subCategory.SubCategory.name_arabic : subCategory.SubCategory.name_english }}</div>
+        </div>
       </v-col>
     </v-row>
   </v-container>
@@ -52,7 +58,9 @@ export default {
       this.filmLoading = true;
       await this.$axios.get(`/films/${this.slug}`,{
         params: {
-          includeSeries: true
+          includeSeries: true,
+          includeCategories: true,
+          includeSubCategories: true
         }
       })
         .then((res) => {
