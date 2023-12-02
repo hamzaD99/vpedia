@@ -1,13 +1,26 @@
 const models = require('../../models')
 const Film = models.Film
 const Series = models.Series
+const User = models.User
+const UserSeries = models.UserSeries
 
 module.exports.getFilmsBySlug = async (req, res) => {
-    console.log(req.user)
+    let handler = req.user ? req.user.userName ? {userName: req.user.userName} : req.user.email ? {email: req.user.email} : null  : null
     const { slug } = req.params
     const includeSeries = req.query.includeSeries == 'true'
-    let includes = []
+    
+    let userFound = await User.findOne({
+        where: handler,
+        include:[{
+            model: UserSeries,
+            as: "Series_access",
+        }]
+    })
+    if(!userFound) return res.sendStatus(500);
+    const seriesIds = userFound.Series_access.map((access) => access.series_id)
+    if(!seriesIds.length) return res.sendStatus(500);
 
+    let includes = []
     if(includeSeries){
         includes.push({
             model: Series,
@@ -20,6 +33,7 @@ module.exports.getFilmsBySlug = async (req, res) => {
         },
         include: includes
     }).then((film) => {
+        if(!seriesIds.includes(film.series_id)) return res.sendStatus(500);
         res.send(film)
     }).catch((err) => {
         console.log(err);

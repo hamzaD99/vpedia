@@ -46,5 +46,9 @@
     "Enter more than 2 letters": "ادخل أكثر من حرفين",
     "Page number": "الصفحة رقم",
     "Pages": "صفحات",
-    "You don't have access to this film": "ليس لديك حق الوصول لهذا الفيلم"
+    "You don't have access to this film": "ليس لديك حق الوصول لهذا الفيلم",
+    "Scientific Reviewer": "المدقق العلمي لمحتوى الفيلم",
+    "Main Category": "التصنيف الرئيسي للفيلم",
+    "Sub Categories": "التصنيفات الفرعية للفيلم",
+    "From": "من برنامج"
 }

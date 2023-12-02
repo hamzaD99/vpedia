@@ -16,7 +16,7 @@
         <h3>{{ $i18n.locale === 'ar' ? series.description_arabic : series.description_english }}</h3>
       </v-col>
       <v-col cols="4">
-        <v-text-field prepend-inner-icon="mdi-magnify" variant="solo" label="ابحث عن فيلم معين" v-model="searchValue" @keyup.enter="searchName" />
+        <v-text-field prepend-inner-icon="mdi-magnify" variant="solo" label="أدخل عنوان الفيلم" v-model="searchValue" @keyup.enter="searchName" />
       </v-col>
       <v-col class="mt-3" cols="12">
         <v-expansion-panels v-model="panel">
