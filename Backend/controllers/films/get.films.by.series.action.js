@@ -1,6 +1,8 @@
 const models = require('../../models');
 const { Op } = require("sequelize");
 const Film = models.Film;
+const Category = models.Category
+const CategoryFilm = models.CategoryFilm
 
 module.exports.getFilmsBySeriesId = async (req, res) => {
     const { seriesId } = req.params;
@@ -21,6 +23,14 @@ module.exports.getFilmsBySeriesId = async (req, res) => {
         attributes: {
             exclude: ['film_link']
         },
+        include:[{
+            model: CategoryFilm,
+            as: 'Categories',
+            include: [{
+                model: Category,
+                as: 'Category'
+            }]
+        }],
         limit: parseInt(pageSize),
         offset: parseInt(offset),
     })

@@ -1,4 +1,6 @@
 const models = require('../../models')
+const Category = models.Category
+const CategoryFilm = models.CategoryFilm
 const Film = models.Film
 const Series = models.Series
 const User = models.User
@@ -8,6 +10,7 @@ module.exports.getFilmsBySlug = async (req, res) => {
     let handler = req.user ? req.user.userName ? {userName: req.user.userName} : req.user.email ? {email: req.user.email} : null  : null
     const { slug } = req.params
     const includeSeries = req.query.includeSeries == 'true'
+    const includeCategories = req.query.includeCategories == 'true'
     
     let userFound = await User.findOne({
         where: handler,
@@ -25,6 +28,16 @@ module.exports.getFilmsBySlug = async (req, res) => {
         includes.push({
             model: Series,
             as: 'Series'
+        })
+    }
+    if(includeCategories){
+        includes.push({
+            model: CategoryFilm,
+            as: 'Categories',
+            include: [{
+                model: Category,
+                as: 'Category'
+            }]
         })
     }
     await Film.findOne({

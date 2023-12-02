@@ -1,6 +1,8 @@
 const models = require('../../models')
 const User = models.User
 const UserSeries = models.UserSeries
+const Category = models.Category
+const CategoryFilm = models.CategoryFilm
 const Series = models.Series
 const Film = models.Film
 
@@ -39,7 +41,15 @@ module.exports.getSeriesBySlug = async (req, res) => {
                 as: "Films",
                 where: {
                     series_id: result.UUID
-                }
+                },
+                include:[{
+                    model: CategoryFilm,
+                    as: 'Categories',
+                    include: [{
+                        model: Category,
+                        as: 'Category'
+                    }]
+                }]
             }]
         };
         await Series.findByPk(result.UUID, queryOptions).then((Series) => {
