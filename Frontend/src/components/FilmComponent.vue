@@ -14,13 +14,13 @@
             : film ? film.Series.name_english : '' }}</h3>
         </router-link>
       </v-col>
-      <v-col cols="8">
+      <v-col cols="12" md="8">
         <div style="padding:56.25% 0 0 0;position:relative;"><iframe
             :src="`https://player.vimeo.com/video/${film.film_link}?h=35e46d5ad9&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479`"
             frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
             style="position:absolute;top:0;left:0;width:100%;height:100%;" :title="film.name_arabic"></iframe></div>
       </v-col>
-      <v-col cols="8" class="mt-3 d-flex flex-column" style="font-size: 18px;">
+      <v-col md="8" cols="12" class="mt-md-3 mt-1 text-center text-md-start d-flex flex-column align-center align-md-start" style="font-size: 18px;">
         <span class="mb-4">{{ $i18n.locale === 'ar' ? film.description_arabic : film.description_english }}</span>
         <span v-if="film.reviewer_arabic || film.reviewer_english" class="mb-2"
           style="color: rgb(var(--v-theme-primary));font-weight: bold;">{{ $t('Scientific Reviewer') }}:</span>

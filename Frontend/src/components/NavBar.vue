@@ -10,23 +10,30 @@
         {{ $t(item.name) }}
       </router-link>
       <v-spacer />
-      <a @click="logout()" v-if="token" exact style="text-decoration: none;
-      color: #0c2d48;
-      padding: 8px 16px;
-      border-bottom: 2px solid transparent;
-      font-size: 13px;
-      cursor: pointer;
-      font-weight: bolder;">
-        {{ $t('Logout') }}
-      </a>
-      <router-link v-else :to="{ name: 'LoginPage' }" exact style="text-decoration: none;
-      color: #0c2d48;
-      padding: 8px 16px;
-      border-bottom: 2px solid transparent;
-      font-size: 13px;
-      font-weight: bolder;">
-        {{ $t('Login') }}
-      </router-link>
+      <div class="d-flex align-center">
+        <span style="font-size: 13px;
+        color: #0c2d48;
+        font-weight: bold;" v-if="token && user">{{`${$t("Hi")}, ${user.name}` }}</span>
+        <span style="font-size: 13px;padding: 16px;
+        color: #0c2d48;" v-if="token && user">|</span>
+        <a @click="logout()" v-if="token" exact style="text-decoration: none;
+        padding: 8px 16px;
+        border-bottom: 2px solid transparent;
+        cursor: pointer;
+        font-size: 13px;
+        color: #0c2d48;
+        font-weight: bolder;">
+          {{ $t('Logout') }}
+        </a>
+        <router-link v-else :to="{ name: 'LoginPage' }" exact style="text-decoration: none;
+        color: #0c2d48;
+        padding: 12px 16px;
+        border-bottom: 2px solid transparent;
+        font-size: 13px;
+        font-weight: bolder;">
+          {{ $t('Login') }}
+        </router-link>
+      </div>
     </v-app-bar>
     <v-app-bar v-else flat app :elevation="1"
       style="background-color: rgba(var(--v-theme-secondaryBackground),0.4) !important" clipped-left class="navbar">
@@ -39,8 +46,9 @@
     </v-app-bar>
     <v-navigation-drawer v-model="drawer" temporary>
       <v-list lines="one" nav>
-        <v-list-item v-for="(item, i) in items" :key="i" :value="item.path" color="primary" :to="{ name: item.path }"><span style="font-size: 18px;">{{
-        $t(item.name) }}</span></v-list-item>
+        <v-list-item v-for="(item, i) in items" :key="i" :value="item.path" color="primary"
+          :to="{ name: item.path }"><span style="font-size: 18px;">{{
+            $t(item.name) }}</span></v-list-item>
 
         <div class="mt-10">
           <a @click="logout()" v-if="token" exact style="text-decoration: none;
@@ -76,7 +84,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      token: 'token'
+      token: 'token',
+      user: 'user'
     })
   },
   data: () => ({

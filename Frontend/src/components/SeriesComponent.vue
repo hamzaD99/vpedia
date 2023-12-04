@@ -5,7 +5,7 @@
     </v-row>
     <v-row v-else align="center" justify="center">
       <v-col cols="12">
-        <v-img style="width: 100%; height: 450px;" cover
+        <v-img style="width: 100%;" :style="$vuetify.display.mobile ? '' : 'height: 450px'" cover
           :src="series ? series.image : require('@/assets/default-series.jpg')"></v-img>
       </v-col>
       <v-col class="d-flex justify-center" cols="12">
@@ -15,7 +15,7 @@
       <v-col class="d-flex justify-center" cols="12">
         <h3>{{ $i18n.locale === 'ar' ? series.description_arabic : series.description_english }}</h3>
       </v-col>
-      <v-col cols="4">
+      <v-col md="4" cols="12">
         <v-text-field prepend-inner-icon="mdi-magnify" variant="solo" :label="$t('Enter Film Name')" v-model="searchValue"
           @keyup.enter="searchName" />
       </v-col>
@@ -27,24 +27,24 @@
                 <div v-if="filmsLoading" style="width: 100%;display: flex; justify-content: center;margin-bottom: 25px;">
                   <v-progress-circular size="50" indeterminate color="primary" />
                 </div>
-                <div v-else v-for="film in films" :key="film.UUID" style="width: 100%;" class="px-16">
+                <div v-else v-for="film in films" :key="film.UUID" style="width: 100%;" class="px-md-16 px-3">
                   <div class="d-flex justify-space-between" style="width: 100%;">
                     <v-tooltip :disabled="hasAccessVar" location="top" :text="$t('You don\'t have access to this film')">
                       <template v-slot:activator="{ props }">
-                        <div v-bind="props" class="d-flex" style="column-gap: 10px;">
+                        <div v-bind="props" class="d-flex align-center" style="column-gap: 10px; width: 50%;">
                           <router-link
                             :style="hasAccessVar ? 'color: rgb(var(--v-theme-primary));text-decoration: none;' : 'pointer-events: none;text-decoration: none;color: black;'"
                             :to="hasAccessVar ? `/film/${film.slug}` : ''">
-                            <h3>{{ $i18n.locale === 'ar' ? film.name_arabic : film.name_english }}</h3>
+                            <h3 :style="$vuetify.display.mobile ? 'font-size: 16px' : ''">{{ $i18n.locale === 'ar' ? film.name_arabic : film.name_english }}</h3>
                           </router-link>
                           <v-icon v-if="!hasAccessVar">mdi-lock</v-icon>
                         </div>
                       </template>
                     </v-tooltip>
-                    <div class="d-flex" style="column-gap: 10px;">
+                    <div class="d-flex text-center text-md-start" style="column-gap: 10px;" :style="$vuetify.display.mobile ? 'font-size: 16px' : ''">
                       <router-link v-for="category in film.Categories" :key="category.UUID"
                         :to="`/categories?category=${category.Category.name_arabic}`" style="text-decoration: none;" target="_blank">
-                        <div style="padding: 10px;background: gainsboro;color: black;border-radius: 5px;">{{ $i18n.locale
+                        <div :style="$vuetify.display.mobile ? 'padding: 5px' : 'padding: 10px'" style="background: gainsboro;color: black;border-radius: 5px;">{{ $i18n.locale
                           === 'ar' ?
                           category.Category.name_arabic : category.Category.name_english }}</div>
                       </router-link>
@@ -54,11 +54,11 @@
                 </div>
                 <div v-if="!filmsLoading"
                   style="width: 100%; background-color: rgb(221 221 221 / 62%);padding: 20px;display: flex;justify-content: space-between;align-items: center;">
-                  <v-btn :disabled="page == 1" @click="fetchPage(-1)" :elevation="0" icon>
+                  <v-btn :size="$vuetify.display.mobile? 'small' : 'default'" :disabled="page == 1" @click="fetchPage(-1)" :elevation="0" icon>
                     <v-icon>{{ $i18n.locale === 'ar' ? 'mdi-arrow-right' : 'mdi-arrow-left' }}</v-icon>
                   </v-btn>
-                  <span>{{ $t('Page number') }} {{ page }} {{ $t('out of') }} {{ filmsTotalPages }}</span>
-                  <v-btn :disabled="page == filmsTotalPages" @click="fetchPage(1)" :elevation="0" icon>
+                  <span :style="$vuetify.display.mobile ? 'font-size: 14px' : ''">{{ $t('Page number') }} {{ page }} {{ $t('out of') }} {{ filmsTotalPages }}</span>
+                  <v-btn :size="$vuetify.display.mobile? 'small' : 'default'" :disabled="page == filmsTotalPages" @click="fetchPage(1)" :elevation="0" icon>
                     <v-icon>{{ $i18n.locale === 'ar' ? 'mdi-arrow-left' : 'mdi-arrow-right' }}</v-icon>
                   </v-btn>
                 </div>
@@ -181,3 +181,8 @@ export default {
   }
 }
 </script>
+<style scoped>
+:deep(.v-expansion-panel-text__wrapper){
+  padding: 4px 0px;
+}
+</style>

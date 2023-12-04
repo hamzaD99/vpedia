@@ -1,14 +1,14 @@
 <template>
   <v-container>
     <v-row justify="space-between">
-      <v-col cols="5" class="d-flex flex-column">
+      <v-col cols="12" md="5" class="d-flex flex-column">
         <span class="mb-3">{{ $t('Main Category') }}:</span>
         <v-autocomplete v-model="categoriesSelected" clearable chips :label="$t('Choose...')" :items="categories" multiple
           :item-value="$i18n.locale === 'ar' ? 'name_arabic' : 'name_english'"
           :item-title="$i18n.locale === 'ar' ? 'name_arabic' : 'name_english'" hide-no-data return-object close-text
           hide-selected :loading="categoriesLoading" />
       </v-col>
-      <v-col cols="5" class="d-flex flex-column">
+      <v-col cols="12" md="5" class="d-flex flex-column">
         <span class="mb-3">{{ $t('Sub Categories') }}:</span>
         <v-autocomplete v-model="subCategoriesSelected" clearable chips :label="$t('Choose...')" :items="subCategories"
           multiple :disabled="!categoriesSelected.length"
@@ -21,7 +21,7 @@
       <v-progress-circular size="50" indeterminate color="primary" />
     </v-row>
     <v-row v-else>
-      <v-col cols="3" v-for="film in films" :key="film.UUID">
+      <v-col cols="6" md="3" v-for="film in films" :key="film.UUID">
         <MovieCard :name="$i18n.locale === 'ar' ? film.name_arabic : film.name_english" :path="`/film/${film.slug}`"
           :description="`${$t('From')} ${$i18n.locale === 'ar' ? film.Series.name_arabic : film.Series.name_english}`"
           :description-path="`/series/${film.Series.slug}`"
