@@ -83,7 +83,7 @@ export default {
     items: [
       { name: 'Home', path: 'HomePage' },
       { name: 'Films', path: 'FilmsPage' },
-      { name: 'Category', path: 'FilmsPage' },
+      { name: 'Category', path: 'CategoriesPage' },
       { name: 'About Us', path: 'AboutUsPage' },
       { name: 'Contact Us', path: 'FilmsPage' },
     ],

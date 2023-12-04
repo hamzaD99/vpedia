@@ -5,6 +5,7 @@ import HomePage from './src/views/HomePage.vue'
 import AboutUsPage from './src/views/AboutUsPage.vue'
 import SeriesPage from './src/views/SeriesPage.vue'
 import FilmPage from './src/views/FilmPage.vue'
+import CategoriesPage from './src/views/CategoriesPage.vue'
 import { isLoggedin, isGuest } from './middleware'
 import i18n from './src/i18n'
 
@@ -36,6 +37,11 @@ const routes = [
     path: '/film/:slug',
     name: 'FilmPage',
     component: FilmPage
+  },
+  {
+    path: '/categories',
+    name: 'CategoriesPage',
+    component: CategoriesPage
   },
   {
     path: '/',

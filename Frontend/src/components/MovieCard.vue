@@ -1,15 +1,16 @@
 <template>
     <div class="d-flex flex-column align-center pb-2 text-center" style="row-gap: 10px; border: 1px solid #ccc!important;">
-        <router-link style="width: 100%;" :to="path">
+        <router-link v-if="image" style="width: 100%;" :to="path">
             <v-img style="cursor: pointer;width: 100%;" :src="image ? image : require('@/assets/default-series.jpg')"
                 @mouseover="showOverlay = true" @mouseout="showOverlay = false">
                 <div class="overlay" :class="showOverlay ? 'overlay__active' : ''"></div>
             </v-img>
         </router-link>
         <h3 style="padding: 3px;font-size: 20px; font-weight: 500; color: rgb(var(--v-theme-primary-darken-1));">{{ name }}</h3>
-        <p>{{ description }}</p>
+        <p v-if="description && !descriptionPath">{{ description }}</p>
+        <router-link v-if="description && descriptionPath" :to="descriptionPath" style="color: #0c2d48;"><p>{{ description }}</p></router-link>
         <router-link style="width: 85%;" :to="path">
-            <v-btn width="100%" height="40px" color="primary-darken-2">{{ $t('Read More') }}</v-btn>
+            <v-btn width="100%" height="40px" color="primary-darken-2">{{ $t('Watch More') }}</v-btn>
         </router-link>
     </div>
 </template>
@@ -25,7 +26,11 @@ export default {
         },
         description: {
             type: String,
-            required: true
+            required: false
+        },
+        descriptionPath: {
+            type: String,
+            required: false
         },
         path: {
             type: String,

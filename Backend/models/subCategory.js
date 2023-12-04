@@ -11,6 +11,7 @@ class SubCategory extends Sequelize.Model {
                 },
                 name_arabic: DataTypes.STRING,
                 name_english: DataTypes.STRING,
+                category_id: DataTypes.UUID,
                 createdAt: DataTypes.DATE,
                 deletedAt: DataTypes.DATE,
                 updatedAt: DataTypes.DATE
@@ -23,7 +24,7 @@ class SubCategory extends Sequelize.Model {
     }
 
     static associate(models) {
-        // this.myAssociations = this.hasMany(models.CategoryFilm, { foreignKey: 'category_id', as: 'Films' })
+        this.myAssociations = this.hasMany(models.SubCategoryFilm, { foreignKey: 'subcategory_id', as: 'Films' })
     }
 
 }
