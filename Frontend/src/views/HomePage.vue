@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Landing -->
-    <v-container fluid class="pa-0">
+    <v-container id="home" fluid class="pa-0">
       <v-row style="height: 525px; overflow: hidden;">
         <v-col cols="12" class="pa-1">
           <v-img style="width: 100%; height: 525px;" cover class="image-transition" :src="require(`@/assets/Banner-01.jpg`)">
@@ -31,7 +31,7 @@
         </v-col>
         <v-col md="6" sm="8" cols="12" class="align-center align-md-start d-flex flex-column px-6 px-md-0" style="row-gap: 20px;">
           <p>
-          {{ $t('We are the leading private media institution in the Arab world that specializes in educational documentary film series of various types, from cultural, historical and scientific. For this purpose, we employ a group of distinguished media professionals, with extensive competencies and experience, each in his field. Our organization has produced a wide range of educational visual materials that have won awards in Arab festivals') }}
+          {{ $t('We are the leading private media institution in the Arab world that specializes in educational documentary film series of various types, from cultural, historical and scientific. For this purpose, we employ a group of distinguished media professionals, with extensive competencies and experience, each in his field. Our organization has produced a wide range of educational visual materials that have won awards in Arab festivals.') }}
           </p>
           <router-link :to="{ name: 'AboutUsPage' }">
             <v-btn height="40px" color="primary">{{ $t('Read More') }}</v-btn>
@@ -54,7 +54,7 @@
         <v-col v-else v-for="series in seriesList" :key="series.UUID" md="3" sm="6" cols="12">
           <MovieCard :name="$i18n.locale === 'ar' ? series.name_arabic : series.name_english"
             :description="$i18n.locale === 'ar' ? series.description_arabic : series.description_english"
-            :path="`/series/${series.slug}`" :image="series.image"/>
+            :path="`/series/${series.slug}`" :image="series.image" default-image/>
         </v-col>
       </v-row>
       <v-row justify="center" style="width: 85%;" class="mb-1 mt-5">
@@ -91,7 +91,7 @@
 
 
     <!-- Contact Us -->
-    <v-container class="pa-0 d-flex flex-column align-center justify-center">
+    <v-container id="contact-us" class="pa-0 d-flex flex-column align-center justify-center">
       <v-row justify="center" style="width: 85%;" class="mb-1 mt-5">
         <v-col cols="12" class="d-flex align-center">
           <v-divider />
@@ -148,6 +148,24 @@
 import MovieCard from '@/components/MovieCard.vue'
 import InputField from '@/components/InputField.vue'
 export default {
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      vm.$nextTick(() => {
+        if(to.name == "ContactPage"){
+          const targetElement = document.getElementById('contact-us');
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+        else if(to.name == "HomePage"){
+          const targetElement = document.getElementById('home');
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      });
+    });
+  },
   components: {
     MovieCard,
     InputField

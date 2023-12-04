@@ -1,5 +1,5 @@
 <template>
-  <CategoriesComponent />
+  <CategoriesComponent :slug="slug" />
 </template>
 
 <script>
@@ -9,6 +9,7 @@ export default {
   name: 'CategoriesPage',
   data() {
     return {
+      slug: this.$route.query
     }
   },
   components:{

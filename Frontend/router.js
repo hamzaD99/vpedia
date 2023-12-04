@@ -50,6 +50,12 @@ const routes = [
     meta: { title: i18n.global.t('Vpedia') }
   },
   {
+    path: '/contact-us',
+    name: 'ContactPage',
+    component: HomePage,
+    meta: { title: i18n.global.t('Vpedia'), contact: true }
+  },
+  {
     path: '/:catchAll(.*)',
     redirect: '/',
   }

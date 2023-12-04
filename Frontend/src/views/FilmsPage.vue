@@ -7,7 +7,7 @@
       <v-col v-for="series in seriesList" :key="series.UUID" md="4" sm="6" cols="12">
         <MovieCard :name="$i18n.locale === 'ar' ? series.name_arabic : series.name_english"
           :description="$i18n.locale === 'ar' ? series.description_arabic : series.description_english"
-          :path="`/series/${series.slug}`" :image="series.image" />
+          :path="`/series/${series.slug}`" :image="series.image" default-image />
       </v-col>
     </v-row>
   </v-container>

@@ -16,7 +16,8 @@
         <h3>{{ $i18n.locale === 'ar' ? series.description_arabic : series.description_english }}</h3>
       </v-col>
       <v-col cols="4">
-        <v-text-field prepend-inner-icon="mdi-magnify" variant="solo" :label="$t('Enter Film Name')" v-model="searchValue" @keyup.enter="searchName" />
+        <v-text-field prepend-inner-icon="mdi-magnify" variant="solo" :label="$t('Enter Film Name')" v-model="searchValue"
+          @keyup.enter="searchName" />
       </v-col>
       <v-col class="mt-3" cols="12">
         <v-expansion-panels v-model="panel">
@@ -28,11 +29,25 @@
                 </div>
                 <div v-else v-for="film in films" :key="film.UUID" style="width: 100%;" class="px-16">
                   <div class="d-flex justify-space-between" style="width: 100%;">
-                    <router-link :style="this.hasAccessVar ? 'color: rgb(var(--v-theme-primary));text-decoration: none;' : 'pointer-events: none;text-decoration: none;color: black;'" :to="this.hasAccessVar ? `/film/${film.slug}` : ''">
-                      <h3>{{ $i18n.locale === 'ar' ? film.name_arabic : film.name_english }}</h3>
-                    </router-link>
+                    <v-tooltip :disabled="hasAccessVar" location="top" :text="$t('You don\'t have access to this film')">
+                      <template v-slot:activator="{ props }">
+                        <div v-bind="props" class="d-flex" style="column-gap: 10px;">
+                          <router-link
+                            :style="hasAccessVar ? 'color: rgb(var(--v-theme-primary));text-decoration: none;' : 'pointer-events: none;text-decoration: none;color: black;'"
+                            :to="hasAccessVar ? `/film/${film.slug}` : ''">
+                            <h3>{{ $i18n.locale === 'ar' ? film.name_arabic : film.name_english }}</h3>
+                          </router-link>
+                          <v-icon v-if="!hasAccessVar">mdi-lock</v-icon>
+                        </div>
+                      </template>
+                    </v-tooltip>
                     <div class="d-flex" style="column-gap: 10px;">
-                      <div style="padding: 10px;background: gainsboro;color: black;border-radius: 5px;" v-for="category in film.Categories" :key="category.UUID">{{ $i18n.locale === 'ar' ? category.Category.name_arabic : category.Category.name_english }}</div>
+                      <router-link v-for="category in film.Categories" :key="category.UUID"
+                        :to="`/categories?category=${category.Category.name_arabic}`" style="text-decoration: none;" target="_blank">
+                        <div style="padding: 10px;background: gainsboro;color: black;border-radius: 5px;">{{ $i18n.locale
+                          === 'ar' ?
+                          category.Category.name_arabic : category.Category.name_english }}</div>
+                      </router-link>
                     </div>
                   </div>
                   <v-divider class="mt-5 mb-5" />
@@ -101,7 +116,7 @@ export default {
       await this.$axios.get(`/series/${this.slug}`)
         .then((res) => {
           this.series = res.data
-          if(!this.series) this.$router.push('/films')
+          if (!this.series) this.$router.push('/films')
           document.title = `${this.$i18n.locale === 'ar' ? this.series.name_arabic : this.series.name_english} - ${this.$t('Vpedia')}`;
           console.log(this.series)
         })
@@ -135,7 +150,7 @@ export default {
       this.page += direction
       this.getFilms()
     },
-    searchName(){
+    searchName() {
       if (this.searchValue.length > 2) {
         if (!this.panel) this.panel = 'content'
         this.nameFilter = {
@@ -146,22 +161,22 @@ export default {
         this.getFilms()
         this.nameFilter = null
       }
-      else if(this.searchValue.length > 0 && this.searchValue.length < 3){
+      else if (this.searchValue.length > 0 && this.searchValue.length < 3) {
         this.$error(this.$t('Enter more than 2 letters'), 'Enter more than 2 letters')
       }
-      if(!this.searchValue){
+      if (!this.searchValue) {
         if (!this.panel) this.panel = 'content'
         this.page = 1
         this.getFilms()
       }
     },
-    hasAccess(){
-      if(Object.keys(this.user).length === 0){
+    hasAccess() {
+      if (Object.keys(this.user).length === 0) {
         this.hasAccessVar = false
         return
       }
       const series_ids = this.user.Series_access.map((access) => access.series_id)
-      this.hasAccessVar =  series_ids.includes(this.series.UUID)
+      this.hasAccessVar = series_ids.includes(this.series.UUID)
     }
   }
 }

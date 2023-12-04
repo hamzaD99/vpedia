@@ -85,7 +85,7 @@ export default {
       { name: 'Films', path: 'FilmsPage' },
       { name: 'Category', path: 'CategoriesPage' },
       { name: 'About Us', path: 'AboutUsPage' },
-      { name: 'Contact Us', path: 'FilmsPage' },
+      { name: 'Contact Us', path: 'ContactPage' },
     ],
     drawer: false
   }),
