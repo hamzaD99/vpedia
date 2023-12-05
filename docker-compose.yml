@@ -1,0 +1,17 @@
+version: '3'
+services:
+  frontend:
+    image: frontend:latest
+    build:
+      context: ./Frontend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+
+  backend:
+    image: backend:latest
+    build:
+      context: ./Backend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"

@@ -48,7 +48,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-::v-deep .v-text-field input.v-field__input {
+:deep(.v-text-field input.v-field__input) {
     max-height: 40px !important;
     min-height: 40px !important;
     display: flex !important;
