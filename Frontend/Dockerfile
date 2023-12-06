@@ -1,12 +1,11 @@
-# Stage 1: Build the Vue application
-FROM node:20 AS builder
+FROM node:latest as build-stage
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
-COPY . .
+COPY ./ .
 RUN npm run build
 
-# Stage 2: Set up Apache and copy the built files
-FROM httpd:alpine
-COPY --from=builder /app/dist /usr/local/apache2/htdocs/
-EXPOSE 80
+FROM nginx as production-stage
+RUN mkdir /app
+COPY --from=build-stage /app/dist /app
+COPY nginx.conf /etc/nginx/nginx.conf
