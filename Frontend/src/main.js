@@ -10,8 +10,8 @@ import i18n from './i18n'
 import VueNumber from 'vue-number-animation'
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:3000/'
-  // baseURL: 'https://ya48j2-ip-82-212-112-75.tunnelmole.net'
+  // baseURL: 'http://localhost:3000/'
+  baseURL: 'https://ya48j2-ip-82-212-112-75.tunnelmole.net'
 });
 
 axiosInstance.interceptors.request.use(
