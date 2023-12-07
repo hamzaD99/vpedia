@@ -25,4 +25,4 @@ services:
       volumes:
         - ./ngrok.yml:/etc/ngrok.yml
       ports:
-        - 3000:3000
+        - 4040:4040
