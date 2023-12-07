@@ -10,8 +10,8 @@ import i18n from './i18n'
 import VueNumber from 'vue-number-animation'
 
 const axiosInstance = axios.create({
-  // baseURL: 'http://localhost:3000/'
-  baseURL: 'https://ya48j2-ip-82-212-112-75.tunnelmole.net'
+  baseURL: 'http://localhost:3000/'
+  // baseURL: 'https://ya48j2-ip-82-212-112-75.tunnelmole.net'
 });
 
 axiosInstance.interceptors.request.use(
@@ -47,31 +47,30 @@ app.use(store)
 app.use(VueNumber)
 app.mount('#app')
 app.config.globalProperties.$axios = { ...axiosInstance }
-
 const validationRules = {
   nameRules: [
-    value => !!value || app._instance.ctx.$t('Name is required'),
+    value => !!value || i18n.global.t('Name is required'),
   ],
   emailRules: [
-    (value) => !!value || app._instance.ctx.$t('Email is required'),
-    (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) || app._instance.ctx.$t('Email must be valid')
+    (value) => !!value || i18n.global.t('Email is required'),
+    (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) || i18n.global.t('Email must be valid')
   ],
   passwordRules: [
-    (value) => !!value || app._instance.ctx.$t('This field is required'),
-    (value) => value.length >= 8 || app._instance.ctx.$t('Password must be at least 8 characters'),
-    (value) => /[A-Z]/.test(value) || app._instance.ctx.$t('Password must contain an uppercase letter'),
-    (value) => /[a-z]/.test(value) || app._instance.ctx.$t('Password must contain a lowercase letter'),
-    (value) => /\d/.test(value) || app._instance.ctx.$t('Password must contain a digit'),
-    (value) => /[!@#$%^&*]/.test(value) || app._instance.ctx.$t('Password must contain a special character'),
+    (value) => !!value || i18n.global.t('This field is required'),
+    (value) => value.length >= 8 || i18n.global.t('Password must be at least 8 characters'),
+    (value) => /[A-Z]/.test(value) || i18n.global.t('Password must contain an uppercase letter'),
+    (value) => /[a-z]/.test(value) || i18n.global.t('Password must contain a lowercase letter'),
+    (value) => /\d/.test(value) || i18n.global.t('Password must contain a digit'),
+    (value) => /[!@#$%^&*]/.test(value) || i18n.global.t('Password must contain a special character'),
   ],
   requiredRule: [
-    (value) => !!value || app._instance.ctx.$t('This field is required'),
+    (value) => !!value || i18n.global.t('This field is required'),
   ]
 }
 app.config.globalProperties.$rules = {...validationRules}
 
 const error = (err, message="Something Went Wrong!") =>{
   console.error(err)
-  store.dispatch('showSnackbar',{ message: app._instance.ctx.$t(message) })
+  store.dispatch('showSnackbar',{ message: i18n.global.t(message) })
 }
 app.config.globalProperties.$error = error
