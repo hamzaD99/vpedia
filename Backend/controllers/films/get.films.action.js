@@ -3,34 +3,43 @@ const { Op } = require("sequelize");
 const Film = models.Film;
 const Category = models.Category
 const CategoryFilm = models.CategoryFilm
+const Series = models.Series
 
-module.exports.getFilmsBySeriesId = async (req, res) => {
-    const { seriesId } = req.params;
-    const { page = 1, pageSize = 10, name } = req.query;
+module.exports.getFilms = async (req, res) => {
+    const { page = 1, pageSize = 10, name, seriesId } = req.query;
     const offset = (page - 1) * pageSize;
+    const includeSeries = req.query.includeSeries === 'true'
 
     let wheres = {}
+    let includes = [{
+        model: CategoryFilm,
+        as: 'Categories',
+        include: [{
+            model: Category,
+            as: 'Category'
+        }]
+    }]
     // name filter
     if(name && name['names'].length){
         wheres[`name_${name['lang'] == 'ar' ? 'arabic' : 'english'}`]={
             [Op.or]: name['names'].map((n) => ({ [Op.like]: `%${n}%` }))
         }
     }
-    wheres['series_id'] = seriesId
-
+    if(seriesId){
+        wheres['series_id'] = seriesId
+    }
+    if(includeSeries){
+        includes.push({
+            model: Series,
+            as: 'Series' 
+        })
+    }
     Film.findAndCountAll({
         where: wheres,
         attributes: {
             exclude: ['film_link']
         },
-        include:[{
-            model: CategoryFilm,
-            as: 'Categories',
-            include: [{
-                model: Category,
-                as: 'Category'
-            }]
-        }],
+        include: includes,
         limit: parseInt(pageSize),
         offset: parseInt(offset),
     })

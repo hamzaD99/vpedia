@@ -6,6 +6,7 @@ import AboutUsPage from './src/views/AboutUsPage.vue'
 import SeriesPage from './src/views/SeriesPage.vue'
 import FilmPage from './src/views/FilmPage.vue'
 import CategoriesPage from './src/views/CategoriesPage.vue'
+import SearchPage from './src/views/SearchPage.vue'
 import { isLoggedin, isGuest } from './middleware'
 import i18n from './src/i18n'
 
@@ -53,7 +54,13 @@ const routes = [
     path: '/contact-us',
     name: 'ContactPage',
     component: HomePage,
-    meta: { title: i18n.global.t('Vpedia'), contact: true }
+    meta: { title: i18n.global.t('Vpedia') }
+  },
+  {
+    path: '/search',
+    name: 'SearchPage',
+    component: SearchPage,
+    meta: { title: `${i18n.global.t('Search')} - ${i18n.global.t('Vpedia')}` }
   },
   {
     path: '/:catchAll(.*)',

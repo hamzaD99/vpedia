@@ -6,8 +6,9 @@
         <v-img alt="Vpedia" class="shrink" contain :src="require('../assets/logo.png')" transition="scale-transition"
           width="100" />
       </router-link>
-      <router-link v-for="item in items" :key="item.name" :to="{ name: item.path }" exact class="nav-link">
-        {{ $t(item.name) }}
+      <router-link v-for="item in items" :key="item.path" :to="{ name: item.path }" exact class="nav-link">
+        <v-icon v-if="item.icon">{{ item.icon }}</v-icon>
+        <span v-if="item.name">{{ $t(item.name) }}</span>
       </router-link>
       <v-spacer />
       <div class="d-flex align-center">
@@ -47,8 +48,8 @@
     <v-navigation-drawer v-model="drawer" temporary>
       <v-list lines="one" nav>
         <v-list-item v-for="(item, i) in items" :key="i" :value="item.path" color="primary"
-          :to="{ name: item.path }"><span style="font-size: 18px;">{{
-            $t(item.name) }}</span></v-list-item>
+          :to="{ name: item.path }"><v-icon v-if="item.icon">{{ item.icon }}</v-icon>
+        <span v-if="item.name" style="font-size: 18px;">{{ $t(item.name) }}</span></v-list-item>
 
         <div class="mt-10">
           <a @click="logout()" v-if="token" exact style="text-decoration: none;
@@ -95,6 +96,7 @@ export default {
       { name: 'Category', path: 'CategoriesPage' },
       { name: 'About Us', path: 'AboutUsPage' },
       { name: 'Contact Us', path: 'ContactPage' },
+      { icon: 'mdi-magnify', path: 'SearchPage' }
     ],
     drawer: false
   }),

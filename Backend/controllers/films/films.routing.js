@@ -1,18 +1,11 @@
-const { getFilmsByName } = require("./get.films.by.name.action");
-const { getFilmsBySeriesId } = require("./get.films.by.series.action")
+const { getFilms } = require("./get.films.action")
 const { getFilmsById } = require("./get.films.by.id.action")
 const { getFilmsBySlug } = require("./get.films.by.slug.action")
 const { getFilmsByCategory } = require("./get.films.by.category.action")
 module.exports = {
     '/': {
         get: {
-            action: getFilmsByName,
-            level: 'public',
-        },
-    },
-    'seriesId/:seriesId': {
-        get: {
-            action: getFilmsBySeriesId,
+            action: getFilms,
             level: 'public',
         },
     },

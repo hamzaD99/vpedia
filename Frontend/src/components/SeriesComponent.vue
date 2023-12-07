@@ -29,9 +29,9 @@
                 </div>
                 <div v-else v-for="film in films" :key="film.UUID" style="width: 100%;" class="px-md-16 px-3">
                   <div class="d-flex justify-space-between" style="width: 100%;">
-                    <v-tooltip :disabled="hasAccessVar" location="top" :text="$t('You don\'t have access to this film')">
+                    <v-tooltip open-delay="200" :disabled="hasAccessVar" location="top" :text="$t('You don\'t have access to this film')">
                       <template v-slot:activator="{ props }">
-                        <div v-bind="props" class="d-flex align-center" style="column-gap: 10px; width: 50%;">
+                        <div v-bind="props" class="d-flex align-center" style="column-gap: 10px; max-width: 50%;">
                           <router-link
                             :style="hasAccessVar ? 'color: rgb(var(--v-theme-primary));text-decoration: none;' : 'pointer-events: none;text-decoration: none;color: black;'"
                             :to="hasAccessVar ? `/film/${film.slug}` : ''">
@@ -126,10 +126,11 @@ export default {
     },
     async getFilms() {
       this.filmsLoading = true;
-      await this.$axios.get(`/films/seriesId/${this.series.UUID}`, {
+      await this.$axios.get('/films', {
         params: {
           page: this.page,
-          name: this.nameFilter
+          name: this.nameFilter,
+          seriesId: this.series.UUID
         }
       })
         .then((res) => {
@@ -151,7 +152,7 @@ export default {
       this.getFilms()
     },
     searchName() {
-      if (this.searchValue.length > 2) {
+      if (this.searchValue.length > 1) {
         if (!this.panel) this.panel = 'content'
         this.nameFilter = {
           lang: "ar",
@@ -161,8 +162,8 @@ export default {
         this.getFilms()
         this.nameFilter = null
       }
-      else if (this.searchValue.length > 0 && this.searchValue.length < 3) {
-        this.$error(this.$t('Enter more than 2 letters'), 'Enter more than 2 letters')
+      else if (this.searchValue.length > 0 && this.searchValue.length < 2) {
+        this.$error(this.$t('Enter more than 1 letter'), 'Enter more than 1 letter')
       }
       if (!this.searchValue) {
         if (!this.panel) this.panel = 'content'

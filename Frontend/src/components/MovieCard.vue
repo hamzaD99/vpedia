@@ -15,7 +15,7 @@
         <h3 style="padding: 3px;font-size: 20px; font-weight: 500; color: rgb(var(--v-theme-primary-darken-1));">{{ name }}</h3>
         <p v-if="description && !descriptionPath">{{ description }}</p>
         <router-link v-if="description && descriptionPath" :to="descriptionPath" style="color: #0c2d48;"><p>{{ description }}</p></router-link>
-        <v-tooltip v-if="disabled" location="top" :text="$t('You don\'t have access to this film')">
+        <v-tooltip open-delay="200" v-if="disabled" location="top" :text="$t('You don\'t have access to this film')">
             <template v-slot:activator="{ props }">
                 <div v-bind="props" style="width: 85%;">
                     <v-btn :disabled="disabled" width="100%" height="40px" color="primary-darken-2">{{ $t('Watch More') }}</v-btn>

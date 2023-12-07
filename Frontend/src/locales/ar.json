@@ -43,7 +43,7 @@
     "Content": "المحتوى",
     "out of": "من أصل",
     "Film": "فيلم",
-    "Enter more than 2 letters": "ادخل أكثر من حرفين",
+    "Enter more than 1 letter": "ادخل أكثر من حرف",
     "Page number": "الصفحة رقم",
     "Pages": "صفحات",
     "You don't have access to this film": "ليس لديك حق الوصول لهذا الفيلم",
@@ -62,5 +62,6 @@
     "as the benefit of watching one of our films is equivalent to reading an entire book.": "ففائدة مشاهدة فلمٍ من أفلامنا تعادل قراءة كتاب بأكمله",
     "Through our diligent work, we seek to provide the best educational documentaries, in a way that expands perceptions, develops personality and stimulates productive work.": "ونحن نسعى من خلال عملِنا الدؤوب إلى تقديمِ أفضلِ الأفلام  الوثائقية التعليمية، بما يوسعُ المداركَ، ويُنمّي الشخصيةْ ويحفزُ على العملِ المنتج.",
     "Our institution philosophy": "فلسفة مؤسستنا",
-    "Hi": "أهلًا"
+    "Hi": "أهلًا",
+    "Search": "بحث"
 }
