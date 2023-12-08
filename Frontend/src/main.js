@@ -11,7 +11,7 @@ import VueNumber from 'vue-number-animation'
 
 const axiosInstance = axios.create({
   // baseURL: 'http://localhost:3000/',
-  baseURL: 'https://zaidlab.com:3000/'
+  baseURL: 'http://10.1.1.23:3000/'
 });
 
 axiosInstance.interceptors.request.use(
