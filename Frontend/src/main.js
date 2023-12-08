@@ -10,7 +10,8 @@ import i18n from './i18n'
 import VueNumber from 'vue-number-animation'
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:3000/'
+  // baseURL: 'http://localhost:3000/',
+  baseURL: 'https://zaidlab.com:3000/'
 });
 
 axiosInstance.interceptors.request.use(
