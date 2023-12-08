@@ -16,7 +16,7 @@ jobs:
       run: cp ~/constents.js Backend/common/constents.js
 
     - name: Stop Old Compose
-      run: sudo docker-compose down
+      run: sudo docker-compose down -S hamza123
     
     - name: Checkout code
       uses: actions/checkout@v2
