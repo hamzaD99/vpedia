@@ -10,6 +10,11 @@ jobs:
     runs-on: self-hosted
 
     steps:
+    - name: Copy DB Credentials
+      run: cp ~/config.json Backend/config/config.json
+    - name: Copy Constants
+      run: cp ~/constents.js Backend/common/constents.js
+
     - name: Stop Old Compose
       run: sudo docker-compose down
     - name: Checkout code
