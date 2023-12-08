@@ -16,7 +16,8 @@ jobs:
       run: cp ~/constents.js Backend/common/constents.js
 
     - name: Stop Old Compose
-      run: sudo docker-compose down
+      run: cd /home/hdaoud/actions-runner/_work/vpedia & sudo docker-compose down
+    
     - name: Checkout code
       uses: actions/checkout@v2
 
