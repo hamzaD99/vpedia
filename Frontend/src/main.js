@@ -8,10 +8,8 @@ import axios from 'axios';
 import store from './store/store'
 import i18n from './i18n'
 import VueNumber from 'vue-number-animation'
-const baseURL = process.env.NODE_ENV === 'production' ? process.env.API_BASE_URL_PROD : process.env.API_BASE_URL_DEV
 
-console.log(process.env.NODE_ENV)
-console.log(baseURL)
+const baseURL = process.env.NODE_ENV === 'production' ? process.env.VUE_APP_API_PROD : process.env.VUE_APP_API_DEV
 
 const axiosInstance = axios.create({
   baseURL: baseURL
