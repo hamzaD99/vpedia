@@ -9,17 +9,17 @@ jobs:
   deploy:
     runs-on: self-hosted
 
-    steps:
-    - name: Copy DB Credentials
-      run: cp ~/config.json Backend/config/config.json
-    - name: Copy Constants
-      run: cp ~/constents.js Backend/common/constents.js
+    steps:   
+    - name: Stop existing Docker containers
+      run: sudo docker-compose down
 
-    - name: Stop Old Compose
-      run: sudo -S hamza123 docker-compose down
-    
-    - name: Checkout code
+    - name: Fetch latest changes
       uses: actions/checkout@v2
+      with:
+        fetch-depth: 1
+
+    - name: Run Git Pull
+      run: git pull
 
     - name: Run Docker Compose
-      run: sudo docker-compose up -d --build & sudo docker ps
+      run: sudo docker-compose up -d
