@@ -12,13 +12,12 @@ jobs:
     steps:
     - name: Stop existing Docker containers
       run: docker-compose down
+    
     - name: Fetch latest changes
       uses: actions/checkout@v2
-      with:
-        fetch-depth: 1
-
-    - name: Run Git Pull
-      run: git pull
-
+    - name: Move creds files
+      run: |
+        cp ~/config.json ~/actions-runner/_work/vpedia/vpedia/Backend/config/
+        cp ~/constents.js ~/actions-runner/_work/vpedia/vpedia/Backend/common/
     - name: Run Docker Compose
       run: docker-compose up -d --build && docker ps
