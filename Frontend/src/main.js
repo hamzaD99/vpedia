@@ -10,8 +10,7 @@ import i18n from './i18n'
 import VueNumber from 'vue-number-animation'
 
 const axiosInstance = axios.create({
-  // baseURL: 'http://localhost:3000/',
-  baseURL: 'http://vpedia.co:3000/'
+  baseURL: process.env.NODE_ENV === 'production' ? process.env.API_BASE_URL_PROD : process.env.API_BASE_URL_DEV
 });
 
 axiosInstance.interceptors.request.use(

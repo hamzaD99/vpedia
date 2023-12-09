@@ -19,5 +19,6 @@ jobs:
       run: |
         cp ~/config.json ~/actions-runner/_work/vpedia/vpedia/Backend/config/
         cp ~/constents.js ~/actions-runner/_work/vpedia/vpedia/Backend/common/
+        cp ~/.env ~/actions-runner/_work/vpedia/vpedia/Frontend/
     - name: Run Docker Compose
       run: docker-compose up -d --build && docker ps
