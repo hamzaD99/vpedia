@@ -10,11 +10,6 @@ jobs:
     runs-on: self-hosted
 
     steps:
-    - name: Print Current User
-      run: whoami
-    - name: Stop existing Docker containers
-      run: docker-compose down
-
     - name: Fetch latest changes
       uses: actions/checkout@v2
       with:
