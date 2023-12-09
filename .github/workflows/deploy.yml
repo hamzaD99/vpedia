@@ -11,6 +11,8 @@ jobs:
 
     steps:
     - name: Stop existing Docker containers
+      run: docker rm vpedia_backend_1 & docker rm vpedia_frontend_1
+    - name: Stop existing Docker containers
       run: docker-compose down
 
     - name: Fetch latest changes
