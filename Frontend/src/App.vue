@@ -1,5 +1,5 @@
 <template>
-  <v-app :style="this.$i18n.locale === 'ar' ? 'direction: rtl !important;' : ''">
+  <v-app :style="this.$i18n.locale === 'ar' ? 'direction: rtl !important;' : ''" style="overflow: hidden;">
     <v-main>
       
       <NavBar v-if="!$route.meta.hideHeaderFooter" />

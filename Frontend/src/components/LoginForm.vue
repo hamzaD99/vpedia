@@ -1,28 +1,33 @@
 <template>
-    <v-container>
-        <v-row justify="center" style="width: 100%;" class="mb-10">
-            <v-col cols="12" class="d-flex align-center">
-                <v-divider />
-                <h1 style="text-wrap: nowrap;color: rgb(var(--v-theme-primary));" class="mx-5">{{ $t('Login') }}</h1>
-                <v-divider />
-            </v-col>
-        </v-row>
-        <v-row justify="center" style="width: 100%;">
-            <v-col cols="5">
-                <InputField :rules="$rules.requiredRule" v-model="loginHandle" :name="$t('Username or Email')" star />
-            </v-col>
-        </v-row>
-        <v-row justify="center" style="width: 100%;">
-            <v-col cols="5">
-                <InputField type="password" :rules="$rules.requiredRule" v-model="password" :name="$t('Password')" star />
-            </v-col>
-        </v-row>
-        <v-row justify="center" style="width: 100%;">
-            <v-col cols="5">
-                <v-btn height="50px" :loading="loginLoading" :disabled="isRegisterDisabled" color="primary" width="100%" @click="login">{{ $t('Login') }}</v-btn>
-            </v-col>
-        </v-row>
-    </v-container>
+    <v-form @submit.prevent="login">
+        <v-container class="text-center text-md-start">
+            <v-row justify="center" style="width: 100%;" class="mb-10">
+                <v-col cols="12" class="d-flex align-center">
+                    <v-divider />
+                    <h1 style="text-wrap: nowrap;color: rgb(var(--v-theme-primary));" class="mx-5">{{ $t('Login') }}</h1>
+                    <v-divider />
+                </v-col>
+            </v-row>
+            <v-row justify="center" style="width: 100%;">
+                <v-col md="5" cols="12">
+                    <InputField :rules="$rules.requiredRule" v-model="loginHandle" :name="$t('Username or Email')" star />
+                </v-col>
+            </v-row>
+            <v-row justify="center" style="width: 100%;">
+                <v-col md="5" cols="12">
+                    <InputField type="password" :rules="$rules.requiredRule" v-model="password" :name="$t('Password')"
+                        star />
+                </v-col>
+            </v-row>
+            <v-row justify="center" style="width: 100%;">
+                <v-col md="5" cols="12">
+
+                    <v-btn type="submit" height="50px" :loading="loginLoading" :disabled="isRegisterDisabled"
+                        color="primary" width="100%" @click="login" @keyup.enter="login">{{ $t('Login') }}</v-btn>
+                </v-col>
+            </v-row>
+        </v-container>
+    </v-form>
 </template>
 
 <script>
@@ -47,7 +52,7 @@ export default {
         login() {
             let isEmail = true;
             this.$rules.emailRules.some(rule => {
-                if(rule(this.loginHandle) !== true) isEmail = false
+                if (rule(this.loginHandle) !== true) isEmail = false
             })
             this.loginLoading = true;
             this.$axios.post('/users/login', {
@@ -55,16 +60,21 @@ export default {
                 userName: isEmail ? null : this.loginHandle,
                 password: this.password
             })
-            .then((response) => {
-                this.$store.dispatch('login',response.data)
-                this.$router.push("/films")
-            })
-            .catch((err) => {
-                this.$error(err, err.response && err.response.data ? err.response.data.error  : null)
-            })
-            .finally(() => {
-                this.loginLoading = false
-            })
+                .then((response) => {
+                    if(response.response && response.response.data && response.response.data.error == "Wrong Credentials"){
+                        this.$error(response.response, response.response.data ? response.response.data.error : 'Something Went Wrong!')
+                    }
+                    else{
+                        this.$store.dispatch('login', response.data)
+                        this.$router.push("/films")
+                    }
+                })
+                .catch((err) => {
+                    this.$error(err, err.response && err.response.data ? err.response.data.error : 'Something Went Wrong!')
+                })
+                .finally(() => {
+                    this.loginLoading = false
+                })
         }
     },
 }

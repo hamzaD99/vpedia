@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="navBar">
     <v-app-bar v-if="!$vuetify.display.mobile" flat app :elevation="1"
       style="background-color: rgba(var(--v-theme-secondaryBackground),0.4) !important" clipped-left class="navbar">
       <router-link class="ml-5 mb-1 mr-3 mt-1" :to="{ name: 'HomePage' }">
