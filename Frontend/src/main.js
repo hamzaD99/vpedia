@@ -32,7 +32,7 @@ axiosInstance.interceptors.response.use(
   (error) => {
     if (error.response && error.response.status === 401) {
       store.dispatch('logout')
-      router.push('/')
+      if(!error.response && error.response.data == "Wrong Credentials") router.push('/')
     }
     return error;
   }

@@ -6,7 +6,7 @@
         <v-col cols="12" class="pa-1">
           <v-img style="width: 100%; height: 525px;" cover class="image-transition" :src="require(`@/assets/Banner-01.jpg`)">
             <div class="text-center" style="display: flex;height: 525px;align-items: center;justify-content: center;">
-              <h1 style="color: white; font-size: 55px;">
+              <h1 style="color: white; font-size: 55px;" class="px-2 px-md-0">
                 {{ $t("Vpedia") }}
               </h1>
             </div>
@@ -67,11 +67,11 @@
 
 
     <!-- Numbers -->
-    <v-container class="my-8 pa-0" style="max-width: 100% !important; height: 400px;" ref="numbers">
+    <v-container class="my-8 pa-0" style="max-width: 100% !important;" :style="$vuetify.display.mobile ? 'height: 500px;' : 'height: 400px;'" ref="numbers">
       <v-row style="height: 100%; overflow: hidden;">
         <v-col cols="12" class="pa-1">
           <v-img cover style="width:100%;" class="image-transition" :src="require(`@/assets/Numbers-Background.jpg`)">
-            <div class="align-center d-flex flex-column justify-center" cover style="width:100%;height: 400px;color: white; background-color: rgba(0,0,0,0.7); row-gap: 50px;">
+            <div class="align-center d-flex flex-column justify-center" cover :style="$vuetify.display.mobile ? 'height: 500px;' : 'height: 400px;'" style="width:100%;color: white; background-color: rgba(0,0,0,0.7); row-gap: 50px;">
               <div class="d-flex align-center mb-2" :style="$vuetify.display.mdAndUp ? 'width: 70%' : 'width: 85%'">
                 <v-divider class="border-opacity-100" color="white" />
                 <h1 style="text-wrap: nowrap;color: white;" class="mx-5">{{ $t('Insights') }}</h1>
@@ -104,10 +104,10 @@
           <h3 class="mb-4" style="color: rgb(var(--v-theme-primary-darken-3));">{{ $t('Send us a message') }}</h3>
           <!-- Form -->
           <div class="d-flex flex-column" style="row-gap: 7px;">
-            <div class="d-flex align-center" style="column-gap: 10px;">
-              <InputField style="width: 33%;" :rules="$rules.nameRules" v-model="name" :name="$t('Name')" star label />
-              <InputField style="width: 33%;" :rules="$rules.emailRules" v-model="email" :name="$t('Email')" label />
-              <InputField style="width: 33%;" v-model="phone" :name="$t('Phone Number')" label />
+            <div class="d-flex align-center" style="column-gap: 10px;flex-wrap: wrap;">
+              <InputField :style="$vuetify.display.mobile ? 'width: 100%;' : 'width: 32%;'" :rules="$rules.nameRules" v-model="name" :name="$t('Name')" star label />
+              <InputField :style="$vuetify.display.mobile ? 'width: 100%;' : 'width: 32%;'" :rules="$rules.emailRules" v-model="email" :name="$t('Email')" label />
+              <InputField :style="$vuetify.display.mobile ? 'width: 100%;' : 'width: 32%;'" v-model="phone" :name="$t('Phone Number')" label />
             </div>
             <InputField style="width: 100%;" :rules="$rules.requiredRule" v-model="subject" :name="$t('Subject')" label />
             <InputField style="width: 100%; height: 400px;" :rules="$rules.requiredRule" v-model="message" :name="$t('Message')" label />
@@ -158,10 +158,10 @@ export default {
           }
         }
         else if(to.name == "HomePage"){
-          const targetElement = document.getElementById('home');
-          if (targetElement) {
-            targetElement.scrollIntoView({ behavior: 'smooth' });
-          }
+          window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
         }
       });
     });
