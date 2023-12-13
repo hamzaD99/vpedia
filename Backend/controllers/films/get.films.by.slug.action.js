@@ -9,14 +9,13 @@ const User = models.User
 const UserSeries = models.UserSeries
 
 module.exports.getFilmsBySlug = async (req, res) => {
-    let handler = req.user ? req.user.userName ? {userName: req.user.userName} : req.user.email ? {email: req.user.email} : null  : null
+    let id = req.user ? req.user.id : null
     const { slug } = req.params
     const includeSeries = req.query.includeSeries == 'true'
     const includeCategories = req.query.includeCategories == 'true'
     const includeSubCategories = req.query.includeSubCategories == 'true'
     
-    let userFound = await User.findOne({
-        where: handler,
+    let userFound = await User.findPk(id,{
         include:[{
             model: UserSeries,
             as: "Series_access",

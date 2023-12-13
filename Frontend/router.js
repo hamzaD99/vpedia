@@ -7,7 +7,8 @@ import SeriesPage from './src/views/SeriesPage.vue'
 import FilmPage from './src/views/FilmPage.vue'
 import CategoriesPage from './src/views/CategoriesPage.vue'
 import SearchPage from './src/views/SearchPage.vue'
-import { isLoggedin, isGuest } from './middleware'
+import AdminPage from './src/views/AdminPage.vue'
+import { isAdmin, isGuest } from './middleware'
 import i18n from './src/i18n'
 
 const routes = [
@@ -16,6 +17,12 @@ const routes = [
     name: 'LoginPage',
     component: LoginPage,
     meta: { title: `${i18n.global.t('Login')} - ${i18n.global.t('Vpedia')}`, middleware: isGuest }
+  },
+  {
+    path: '/admin',
+    name: 'AdminPage',
+    component: AdminPage,
+    meta: { title: `${i18n.global.t('Admin')} - ${i18n.global.t('Vpedia')}`, middleware: isAdmin, hideHeaderFooter: true }
   },
   {
     path: '/films',

@@ -11,13 +11,17 @@ const levels = {
         }
         next();
     },
+    admin: (req, res, next) => {
+        if (!isAdmin(req)) {
+            return res.status(401).json({ error: 'Unathurized' });
+        }
+        next();
+    },
 }
 
 const isValidToken = (req) => {
     let token = req.header('Authorization');
-    if (!token) {
-        return false
-    }
+    if (!token) return false
     try {
         token = token.split(" ")[1]
         const decoded = jwt.verify(token, constents.JWT_SECERT);
@@ -27,5 +31,11 @@ const isValidToken = (req) => {
         return false
     }
 };
+
+const isAdmin = (req) => {
+    if(!isValidToken(req)) return false
+    if(req.user && req.user.roleId == 7) return true
+    return false
+}
 
 module.exports = level => (req, res, next) => levels[level](req, res, next);

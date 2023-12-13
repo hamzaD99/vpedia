@@ -25,7 +25,11 @@ module.exports.loginUser = async (req, res) => {
     if (!userFound) return res.status(401).send({ error: "Wrong Credentials" })
 
     if (await bcrypt.compare(password, userFound.password)) {
-        const token = jwt.sign(condtion, constents.JWT_SECERT, { expiresIn: '24h' });
+        const token = jwt.sign({
+            ...condtion,
+            id: userFound.UUID,
+            roleId: userFound.roleId
+        }, constents.JWT_SECERT, { expiresIn: '24h' });
         return res.status(200).send({ "user": userFound, "token": token })
     }
     else {
