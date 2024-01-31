@@ -6,7 +6,7 @@ module.exports = {
     '/': {
         get: {
             action: getAllUsers,
-            level: 'member',
+            level: 'admin',
         },
         post: {
             action: createUser,
