@@ -5,7 +5,7 @@ const UserSeries = models.UserSeries
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-module.exports.loginUser = async (req, res) => {
+module.exports.loginUserByPassword = async (req, res) => {
     const { email, password, userName } = req.body
     let userFound;
     let condtion = userName ? { userName: userName } : email ? { email: email } : null;
