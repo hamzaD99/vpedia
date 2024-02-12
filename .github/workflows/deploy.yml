@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - name: Stop existing Docker containers
-      run: docker-compose down
+      run: cd .. && docker-compose down
     
     - name: Fetch latest changes
       uses: actions/checkout@v2
