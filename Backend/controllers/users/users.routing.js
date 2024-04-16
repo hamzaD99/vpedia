@@ -17,17 +17,12 @@ module.exports = {
     },
     '/login': {
         post: {
-            action: passwordMiddleware,
-            level: 'public'
-        }
-    },
-    'sucess-login': {
-        get: {
+            middlewares: passwordMiddleware,
             action: sucessLogin,
             level: 'public'
         }
     },
-    'failure-login': {
+    '/failure-login': {
         get: {
             action: failureLogin,
             level: 'public'

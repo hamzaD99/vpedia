@@ -17,12 +17,14 @@ initializePassport(
 )
 
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors())
 app.use(flash())
+app.use(express.urlencoded({ extended: false }))
+console.log(constents.JWT_SECERT)
 app.use(session({
   secret: constents.JWT_SECERT,
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: true
 }))
 app.use(passport.initialize())
 app.use(passport.session())

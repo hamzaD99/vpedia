@@ -21,8 +21,9 @@ async function getUserByHandle(handle){
         .then(async (user) => {
             userFound = user
         }).catch((err) => {
-            return res.status(500).send(err)
-    })
+            console.log(err)
+            return null
+        })
     return userFound;
 }
 function getUserByUUID(id){
@@ -55,8 +56,8 @@ function initialize(passport) {
 
   passport.use(new LocalStrategy({ usernameField: 'handle' }, authenticateUser))
   passport.serializeUser((user, done) => {
-    return done(null, user)
-  })
+    done(null, user);
+  });
   passport.deserializeUser((id, done) => {
     return done(null, getUserByUUID(id))
   })
