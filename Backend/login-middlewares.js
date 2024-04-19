@@ -8,6 +8,13 @@ const passwordMiddleware = (req, res, next) => {
     })(req, res, next);
 };
 
+const SAMLMiddleware = (req, res, next) => {
+    passport.authenticate('saml', {
+        failureRedirect: '/users/failure-login',
+        failureFlash: true
+    })(req, res, next);
+};
 module.exports = {
     passwordMiddleware,
+    SAMLMiddleware
 };
