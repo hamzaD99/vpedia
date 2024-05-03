@@ -4,11 +4,11 @@ class SubCategory extends Sequelize.Model {
     static init(sequelize, DataTypes) {
         return super.init(
             {
-                UUID: {
-                    type: DataTypes.UUID,
-                    defaultValue: DataTypes.UUIDV4,
-                    primaryKey: true,
-                },
+               ID: {
+                type: DataTypes.INTEGER,
+                autoIncrement: true,
+                primaryKey: true,
+            },
                 name_arabic: DataTypes.STRING,
                 name_english: DataTypes.STRING,
                 category_id: DataTypes.UUID,

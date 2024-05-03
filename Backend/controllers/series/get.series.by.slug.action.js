@@ -40,7 +40,7 @@ module.exports.getSeriesBySlug = async (req, res) => {
                 model: Film,
                 as: "Films",
                 where: {
-                    series_id: result.UUID
+                    series_id: result.id
                 },
                 include:[{
                     model: CategoryFilm,
@@ -52,7 +52,7 @@ module.exports.getSeriesBySlug = async (req, res) => {
                 }]
             }]
         };
-        await Series.findByPk(result.UUID, queryOptions).then((Series) => {
+        await Series.findByPk(result.id, queryOptions).then((Series) => {
             result = Series
         }).catch((err) => {
             console.log(err);

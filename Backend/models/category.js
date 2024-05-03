@@ -4,9 +4,9 @@ class Category extends Sequelize.Model {
     static init(sequelize, DataTypes) {
         return super.init(
             {
-                UUID: {
-                    type: DataTypes.UUID,
-                    defaultValue: DataTypes.UUIDV4,
+               ID: {
+                    type: DataTypes.INTEGER,
+                    autoIncrement: true,
                     primaryKey: true,
                 },
                 name_arabic: DataTypes.STRING,
