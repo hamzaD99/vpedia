@@ -1,6 +1,8 @@
 const { getAllUsers } = require("./get.all.users.action");
 const { createUser } = require("./create.user.action");
-const { loginUserByPassword } = require("./login.user.by.password.action");
+const { failureLogin } = require("./failure.login.action");
+const { sucessLogin } = require("./sucess.login.action");
+const { passwordMiddleware, SAMLMiddleware } = require('../../login-middlewares')
 
 module.exports = {
     '/': {
@@ -15,7 +17,21 @@ module.exports = {
     },
     '/login': {
         post: {
-            action: loginUserByPassword,
+            middlewares: passwordMiddleware,
+            action: sucessLogin,
+            level: 'public'
+        }
+    },
+    '/saml-login': {
+        post: {
+            middlewares: SAMLMiddleware,
+            action: sucessLogin,
+            level: 'public'
+        }
+    },
+    '/failure-login': {
+        get: {
+            action: failureLogin,
             level: 'public'
         }
     }

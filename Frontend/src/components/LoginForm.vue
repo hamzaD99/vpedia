@@ -23,7 +23,7 @@
                 <v-col md="5" cols="12">
 
                     <v-btn type="submit" height="50px" :loading="loginLoading" :disabled="isRegisterDisabled"
-                        color="primary" width="100%" @click="login" @keyup.enter="login">{{ $t('Login') }}</v-btn>
+                        color="primary" width="100%">{{ $t('Login') }}</v-btn>
                 </v-col>
             </v-row>
         </v-container>

@@ -6,9 +6,9 @@ const { DataTypes } = require('sequelize');
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('sub_categories', {
-      UUID: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
+      ID: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
         primaryKey: true,
       },
       name_arabic: {
