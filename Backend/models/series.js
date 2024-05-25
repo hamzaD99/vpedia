@@ -8,7 +8,7 @@ class Series extends Sequelize.Model {
                 type: DataTypes.INTEGER,
                 autoIncrement: true,
                 primaryKey: true,
-            },
+                },
                 name_arabic: DataTypes.STRING,
                 name_english: DataTypes.STRING,
                 description_arabic: DataTypes.STRING,

@@ -1,7 +1,7 @@
 const { getFilms } = require("./get.films.action")
 const { getFilmsById } = require("./get.films.by.id.action")
 const { getFilmsBySlug } = require("./get.films.by.slug.action")
-
+const { updateFilms } = require("./update.films.action")
 module.exports = {
     '/': {
         get: {
@@ -14,6 +14,10 @@ module.exports = {
             action: getFilmsById,
             level: 'activeMember',
         },
+        put: {
+            action: updateFilms,
+            level: 'admin'
+        }
     },
     '/:slug': {
         get: {

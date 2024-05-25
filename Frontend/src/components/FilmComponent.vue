@@ -21,11 +21,18 @@
             style="position:absolute;top:0;left:0;width:100%;height:100%;" :title="film.name_arabic"></iframe></div>
       </v-col>
       <v-col md="8" cols="12" class="mt-md-3 mt-1 text-center text-md-start d-flex flex-column align-center align-md-start" style="font-size: 18px;">
-        <span style="white-space: pre-wrap;" class="mb-4">{{ $i18n.locale === 'ar' ? film.description_arabic : film.description_english }}</span>
-        <span v-if="film.reviewer_arabic || film.reviewer_english" class="mb-2"
+        <span v-if="!showDescEdit" @click="showDescEdit=true" style="white-space: pre-wrap;" class="mb-4">{{ $i18n.locale === 'ar' ? film.description_arabic : film.description_english }}</span>
+        
+        <v-textarea v-if="showDescEdit" style="width: 100%;" :label="$t('Enter Description')" :rules="$rules.requiredRule" v-model="newDescription"></v-textarea>
+        <div v-if="showDescEdit" class="d-flex align-center my-5" style="column-gap: 15px;">
+          <v-btn :disabled="isEditDisabled" :loading="editLoading" style="height: 50px;width: fit-content;" color="primary-darken-2" @click="editFilm">{{ $t('Save') }}</v-btn>
+          <v-btn style="height: 50px;width: fit-content;" color="grey" @click="showDescEdit = false">{{ $t('Close') }}</v-btn>
+        </div>
+
+        <span v-if="film.Reviewer" class="mb-2"
           style="color: rgb(var(--v-theme-primary));font-weight: bold;">{{ $t('Scientific Reviewer') }}:</span>
-        <span v-if="film.reviewer_arabic || film.reviewer_english" class="mb-4">{{ $i18n.locale === 'ar' ?
-          film.reviewer_arabic : film.reviewer_english }}</span>
+        <span v-if="film.Reviewer" class="mb-4">{{ $i18n.locale === 'ar' ?
+          film.Reviewer.name_arabic : film.Reviewer.name_english }}</span>
         <span v-if="film.Categories.length" class="mb-2" style="color: rgb(var(--v-theme-primary));font-weight: bold;">{{
           $t('Main Category') }}:</span>
         <div v-if="film.Categories.length" class="d-flex mb-4 flex-wrap" style="column-gap: 18px;row-gap: 18px;">
@@ -42,14 +49,21 @@
 </template>
 
 <script>
+import InputField from '@/components/InputField.vue'
 import { mapGetters } from 'vuex';
 
 export default {
   name: 'FilmComponent',
   data() {
     return {
-      filmLoading: false
+      filmLoading: false,
+      showDescEdit: false,
+      newDescription: null,
+      editLoading: false
     }
+  },
+  components: {
+    InputField
   },
   mounted() {
     document.title = `${this.$t('Vpedia')}`;
@@ -63,7 +77,10 @@ export default {
   computed: {
     ...mapGetters({
       user: 'user'
-    })
+    }),
+    isEditDisabled(){
+      return this.$rules.requiredRule.some(rule => rule(this.newDescription) !== true)
+    }
   },
   async created() {
     await this.getFilmBySlug()
@@ -74,26 +91,44 @@ export default {
       await this.$axios.get(`/films/${this.slug}`, {
         params: {
           includeSeries: true,
-          includeCategories: true
+          includeCategories: true,
+          includeScientificReviewer: true
         }
       })
-        .then((res) => {
-          this.film = res.data
-          if (this.film) {
-            document.title = `${this.$i18n.locale === 'ar' ? this.film.name_arabic : this.film.name_english} - ${this.$t('Vpedia')}`;
-            console.log(this.film)
-          }
-          else {
-            this.$error('Film not found')
-            this.$router.push('/films')
-          }
-        })
-        .catch((err) => {
-          this.$error(err, this.$t("You don't have access to this film"))
-        })
-        .finally(() => {
-          this.filmLoading = false
-        })
+      .then((res) => {
+        this.film = res.data
+        if (this.film) {
+          document.title = `${this.$i18n.locale === 'ar' ? this.film.name_arabic : this.film.name_english} - ${this.$t('Vpedia')}`;
+          console.log(this.film)
+          this.newDescription = this.$i18n.locale === 'ar' ? this.film.description_arabic : this.film.description_english
+        }
+        else {
+          this.$error('Film not found')
+          this.$router.push('/films')
+        }
+      })
+      .catch((err) => {
+        this.$error(err, this.$t("You don't have access to this film"))
+      })
+      .finally(() => {
+        this.filmLoading = false
+      })
+    },
+    async editFilm(){
+      this.editLoading = true
+      await this.$axios.put(`/films/id/${this.film.id}`, {
+        language: this.$i18n.locale,
+        description: this.newDescription
+      })
+      .then(() => {
+        this.$router.go(`/film/${this.film.slug}`)
+      })
+      .catch((err) => {
+        this.$error(err)
+      })
+      .finally(() => {
+        this.editLoading = false
+      })
     }
   }
 }

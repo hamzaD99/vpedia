@@ -1,7 +1,7 @@
 <template>
     <div class="d-flex flex-column" :class="colorClass">
         <h4 v-if="name && !label" class="font-weight-medium mb-2">{{ name }} <span style="color: red;">{{star ? ' *' : ''}}</span></h4>
-        <v-text-field  dense :type="type" :label="label ? name : null" :rules="rules" :loading="loading" :v-model="modelValue" @input="$emit('update:modelValue', $event.target.value)" style="width: 100%;" :style="direction == 'ltr' ? 'direction: ltr !important;' : ''" />
+        <v-text-field dense :type="type" :label="label ? name : null" :rules="rules" :loading="loading" v-model="modelValue" @input="$emit('update:modelValue', $event.target.value)" style="width: 100%;" :style="direction == 'ltr' ? 'direction: ltr !important;' : ''" />
     </div>
 </template>
 
@@ -37,12 +37,15 @@ export default {
         direction:{
             type: String,
             default: ''
+        },
+        defaultValue: {
+            type: String
         }
     },
-    data: () => ({
-        modelValue: null
-    }),
-    methods: {
+    data() {
+        return {
+            modelValue: this.defaultValue || null
+        };
     },
 }
 </script>
