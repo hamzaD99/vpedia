@@ -1,5 +1,5 @@
 const models = require('../../models')
-const { Op, where } = require("sequelize");
+const { Op } = require("sequelize");
 const Series = models.Series
 
 module.exports.getSeries = async (req, res) => {

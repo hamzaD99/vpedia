@@ -4,7 +4,7 @@ class Series extends Sequelize.Model {
     static init(sequelize, DataTypes) {
         return super.init(
             {
-               ID: {
+               id: {
                 type: DataTypes.INTEGER,
                 autoIncrement: true,
                 primaryKey: true,

@@ -1,7 +1,7 @@
 const { getFilms } = require("./get.films.action")
 const { getFilmsById } = require("./get.films.by.id.action")
 const { getFilmsBySlug } = require("./get.films.by.slug.action")
-const { getFilmsByCategory } = require("./get.films.by.category.action")
+
 module.exports = {
     '/': {
         get: {
@@ -12,19 +12,13 @@ module.exports = {
     'id/:id': {
         get: {
             action: getFilmsById,
-            level: 'member',
-        },
-    },
-    '/by-category': {
-        get: {
-            action: getFilmsByCategory,
-            level: 'public',
+            level: 'activeMember',
         },
     },
     '/:slug': {
         get: {
             action: getFilmsBySlug,
-            level: 'member',
+            level: 'activeMember',
         },
     }
 }

@@ -6,19 +6,34 @@ const CategoryFilm = models.CategoryFilm
 const Series = models.Series
 
 module.exports.getFilms = async (req, res) => {
-    const { page = 1, pageSize = 10, name, seriesId } = req.query;
+    const { page = 1, pageSize = 10, name, seriesId, categories } = req.query;
     const offset = (page - 1) * pageSize;
     const includeSeries = req.query.includeSeries === 'true'
+    const includeCategories = req.query.includeCategories === 'true'
 
     let wheres = {}
-    let includes = [{
-        model: CategoryFilm,
-        as: 'Categories',
-        include: [{
-            model: Category,
-            as: 'Category'
-        }]
-    }]
+    let includes = []
+
+    if(includeCategories){
+        let categoryWhere = {}
+        if (categories) {
+            const categoriesList = JSON.parse(categories);
+            categoryWhere['category_id'] = { [Op.in]: categoriesList };
+        }    
+        if (includeCategories) {
+            includes.push({
+                model: CategoryFilm,
+                as: 'Categories',
+                where: categoryWhere,
+                include: [{
+                    model: Category,
+                    as: 'Category'
+                }],
+                required: true
+            });
+        }
+    }
+
     // name filter
     if(name && name['names'].length){
         wheres[`name_${name['lang'] == 'ar' ? 'arabic' : 'english'}`]={
@@ -36,10 +51,10 @@ module.exports.getFilms = async (req, res) => {
     }
     Film.findAndCountAll({
         where: wheres,
+        include: includes,
         attributes: {
             exclude: ['film_link']
         },
-        include: includes,
         limit: parseInt(pageSize),
         offset: parseInt(offset),
     })

@@ -6,10 +6,10 @@ const { DataTypes } = require('sequelize');
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('contact_us', {
-      ID: {
+      id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
-        primaryKey: true,
+        primaryKey: true
       },
       name: {
         type: DataTypes.STRING,
@@ -34,6 +34,7 @@ module.exports = {
       createdAt: {
         type: DataTypes.DATE,
         allowNull: false,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
       deletedAt: {
         type: DataTypes.DATE,

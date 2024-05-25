@@ -6,10 +6,10 @@ const { DataTypes } = require('sequelize');
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('films', {
-      ID: {
+      id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
-        primaryKey: true,
+        primaryKey: true
       },
       name_arabic: {
         type: DataTypes.STRING,
@@ -27,25 +27,26 @@ module.exports = {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      reviewer_arabic: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      reviewer_english: {
-        type: DataTypes.STRING,
-        allowNull: true,
+      reviewer_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true
       },
       film_link: {
         type: DataTypes.STRING,
         allowNull: false,
       },
       series_id: {
-        type: DataTypes.UUID,
+        type: DataTypes.INTEGER,
         allowNull: false,
+      },
+      order: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true
       },
       createdAt: {
         type: DataTypes.DATE,
         allowNull: false,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
       deletedAt: {
         type: DataTypes.DATE,

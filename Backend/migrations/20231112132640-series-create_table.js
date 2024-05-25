@@ -6,10 +6,10 @@ const { DataTypes } = require('sequelize');
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('series', {
-      ID: {
+      id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
-        primaryKey: true,
+        primaryKey: true
       },
       name_arabic: {
         type: DataTypes.STRING,
@@ -31,9 +31,14 @@ module.exports = {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      order: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true
+      },
       createdAt: {
         type: DataTypes.DATE,
         allowNull: false,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
       deletedAt: {
         type: DataTypes.DATE,
