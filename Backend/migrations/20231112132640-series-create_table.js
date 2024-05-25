@@ -20,11 +20,11 @@ module.exports = {
         allowNull: false,
       },
       description_arabic: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: true,
       },
       description_english: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false,
       },
       image: {

@@ -1,6 +1,5 @@
 <template>
     <v-container class="fill-height">
-      <p>مرحبااااااااااا نبنبل ميبىلبتمنلىتب</p>
       <v-row justify="center" class="ma-7 ma-md-0">
         <v-col md="5" cols="12" :style="$vuetify.display.mdAndUp ? 'border-radius: 10px 0px 0px 10px;padding: 50px 40px;':'border-radius: 10px 10px 0px 0px;padding: 30px 20px;'" class="brainboost-section brainboost-section__left text-center align-center align-md-baseline text-md-start">
           <h1 class="text-uppercase mb-6">Welcome!</h1>

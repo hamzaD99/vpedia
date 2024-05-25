@@ -27,7 +27,7 @@
                 <div v-if="filmsLoading" style="width: 100%;display: flex; justify-content: center;margin-bottom: 25px;">
                   <v-progress-circular size="50" indeterminate color="primary" />
                 </div>
-                <div v-else v-for="film in films" :key="film.UUID" style="width: 100%;" class="px-md-16 px-3">
+                <div v-else v-for="film in films" :key="film.id" style="width: 100%;" class="px-md-16 px-3">
                   <div class="d-flex justify-space-between" style="width: 100%;">
                     <v-tooltip open-delay="200" :disabled="hasAccessVar" location="top" :text="$t('You don\'t have access to this film')">
                       <template v-slot:activator="{ props }">
@@ -42,7 +42,7 @@
                       </template>
                     </v-tooltip>
                     <div class="d-flex text-center text-md-start" style="column-gap: 10px;" :style="$vuetify.display.mobile ? 'font-size: 16px' : ''">
-                      <router-link v-for="category in film.Categories" :key="category.UUID"
+                      <router-link v-for="category in film.Categories" :key="category.id"
                         :to="`/categories?category=${category.Category.name_arabic}`" style="text-decoration: none;" target="_blank">
                         <div :style="$vuetify.display.mobile ? 'padding: 5px' : 'padding: 10px'" style="background: gainsboro;color: black;border-radius: 5px;">{{ $i18n.locale
                           === 'ar' ?
@@ -130,7 +130,8 @@ export default {
         params: {
           page: this.page,
           name: this.nameFilter,
-          seriesId: this.series.UUID
+          seriesId: this.series.id,
+          includeCategories: true
         }
       })
         .then((res) => {
@@ -176,8 +177,8 @@ export default {
         this.hasAccessVar = false
         return
       }
-      const series_ids = this.user.Series_access.map((access) => access.series_id)
-      this.hasAccessVar = series_ids.includes(this.series.UUID)
+      this.hasAccessVar = this.$filters.isActiveUser(this.user)
+      console.log(this.hasAccessVar)
     }
   }
 }

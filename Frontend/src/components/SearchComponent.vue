@@ -10,11 +10,11 @@
       <v-progress-circular size="50" indeterminate color="primary" />
     </v-row>
     <v-row v-else justify="center">
-      <v-col cols="6" md="3" v-for="film in films" :key="film.UUID">
+      <v-col cols="6" md="3" v-for="film in films" :key="film.id">
         <MovieCard :name="$i18n.locale === 'ar' ? film.name_arabic : film.name_english" :path="`/film/${film.slug}`"
           :description="`${$t('From')} ${$i18n.locale === 'ar' ? film.Series.name_arabic : film.Series.name_english}`"
           :description-path="`/series/${film.Series.slug}`"
-          :disabled="userSeries.length ? (userSeries.includes(film.Series.UUID) ? false : true) : true" />
+          :disabled="!$filters.isActiveUser(user)" />
       </v-col>
     </v-row>
     <v-row v-if="!filmsLoading && films.length" justify="center">
@@ -60,11 +60,7 @@ export default {
   computed: {
     ...mapGetters({
       user: 'user'
-    }),
-    userSeries() {
-      if (this.user && this.user.Series_access) return this.user.Series_access.map((access) => access.series_id)
-      return []
-    },
+    })
   },
   watch: {
 

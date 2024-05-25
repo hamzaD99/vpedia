@@ -21,28 +21,19 @@
             style="position:absolute;top:0;left:0;width:100%;height:100%;" :title="film.name_arabic"></iframe></div>
       </v-col>
       <v-col md="8" cols="12" class="mt-md-3 mt-1 text-center text-md-start d-flex flex-column align-center align-md-start" style="font-size: 18px;">
-        <span class="mb-4">{{ $i18n.locale === 'ar' ? film.description_arabic : film.description_english }}</span>
+        <span style="white-space: pre-wrap;" class="mb-4">{{ $i18n.locale === 'ar' ? film.description_arabic : film.description_english }}</span>
         <span v-if="film.reviewer_arabic || film.reviewer_english" class="mb-2"
           style="color: rgb(var(--v-theme-primary));font-weight: bold;">{{ $t('Scientific Reviewer') }}:</span>
         <span v-if="film.reviewer_arabic || film.reviewer_english" class="mb-4">{{ $i18n.locale === 'ar' ?
           film.reviewer_arabic : film.reviewer_english }}</span>
         <span v-if="film.Categories.length" class="mb-2" style="color: rgb(var(--v-theme-primary));font-weight: bold;">{{
           $t('Main Category') }}:</span>
-        <div v-if="film.Categories.length" class="d-flex mb-4" style="column-gap: 18px;">
-          <router-link v-for="category in film.Categories" :key="category.UUID"
+        <div v-if="film.Categories.length" class="d-flex mb-4 flex-wrap" style="column-gap: 18px;row-gap: 18px;">
+          <router-link v-for="category in film.Categories" :key="category.id"
             :to="`/categories?category=${category.Category.name_arabic}`" style="text-decoration: none;" target="_blank">
             <div style="padding: 10px;background: gainsboro;color: black;border-radius: 5px;">{{ $i18n.locale
               === 'ar' ?
               category.Category.name_arabic : category.Category.name_english }}</div>
-          </router-link>
-        </div>
-        <span v-if="film.SubCategories.length" class="mb-2"
-          style="color: rgb(var(--v-theme-primary));font-weight: bold">{{ $t('Sub Categories') }}:</span>
-        <div v-if="film.SubCategories.length" class="d-flex mb-4" style="column-gap: 18px;">
-          <router-link v-for="subCategory in film.SubCategories" :key="subCategory.UUID"
-            :to="`/categories?subCategory=${subCategory.SubCategory.name_arabic}`" style="text-decoration: none;" target="_blank">
-            <div style="padding: 10px;background: gainsboro;color: black;border-radius: 5px;">{{ subCategory.SubCategory ? ($i18n.locale
-              === 'ar' ? subCategory.SubCategory.name_arabic : subCategory.SubCategory.name_english) : '' }}</div>
           </router-link>
         </div>
       </v-col>
@@ -83,8 +74,7 @@ export default {
       await this.$axios.get(`/films/${this.slug}`, {
         params: {
           includeSeries: true,
-          includeCategories: true,
-          includeSubCategories: true
+          includeCategories: true
         }
       })
         .then((res) => {

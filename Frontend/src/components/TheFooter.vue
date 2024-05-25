@@ -1,6 +1,6 @@
 <template>
   <div class="footer">
-    <span>All Rights Reserved 2023 © Visual Pedia</span>
+    <span>All Rights Reserved 2024 © Visual Pedia</span>
     <span>Powered by Al-Shorouq For Media Production</span>
   </div>
 </template>

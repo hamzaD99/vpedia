@@ -17,21 +17,18 @@ module.exports.getFilms = async (req, res) => {
     if(includeCategories){
         let categoryWhere = {}
         if (categories) {
-            const categoriesList = JSON.parse(categories);
-            categoryWhere['category_id'] = { [Op.in]: categoriesList };
+            categoryWhere['category_id'] = { [Op.in]: categories };
         }    
-        if (includeCategories) {
-            includes.push({
-                model: CategoryFilm,
-                as: 'Categories',
-                where: categoryWhere,
-                include: [{
-                    model: Category,
-                    as: 'Category'
-                }],
-                required: true
-            });
-        }
+        includes.push({
+            model: CategoryFilm,
+            as: 'Categories',
+            where: categoryWhere,
+            include: [{
+                model: Category,
+                as: 'Category'
+            }],
+            required: true
+        });
     }
 
     // name filter

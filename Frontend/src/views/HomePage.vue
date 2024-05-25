@@ -51,7 +51,7 @@
       </v-row>
       <v-row style="width: 85%;" class="mb-10 d-flex justify-center">
         <v-progress-circular v-if="seriesLoading" indeterminate color="primary" />
-        <v-col v-else v-for="series in seriesList" :key="series.UUID" md="3" sm="6" cols="12">
+        <v-col v-else v-for="series in seriesList" :key="series.id" md="3" sm="6" cols="12">
           <MovieCard :name="$i18n.locale === 'ar' ? series.name_arabic : series.name_english"
             :description="$i18n.locale === 'ar' ? series.description_arabic : series.description_english"
             :path="`/series/${series.slug}`" :image="series.image" default-image/>
@@ -219,7 +219,7 @@ export default {
         params: {
           name: {
             lang: "ar",
-            names: ["العالم من حولنا", "أحداث القرن العشرين", "قضايا عالمية", "المستكشفون الجدد"]
+            names: ["العالم من حولنا", "أحداث القرن العشرين", "المجلة العلمية", "حقيقة الغرب الأمريكي"]
           }
         }
       })
