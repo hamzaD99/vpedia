@@ -6,16 +6,16 @@ const { DataTypes } = require('sequelize');
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('categories_films', {
-      ID: {
+      id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
-        primaryKey: true,
+        primaryKey: true
       },
       film_id: {
-        type: DataTypes.UUID
+        type: DataTypes.INTEGER
       },
       category_id: {
-        type: DataTypes.UUID
+        type: DataTypes.INTEGER
       },
       createdAt: {
         type: DataTypes.DATE,

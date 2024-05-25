@@ -5,17 +5,19 @@ const { DataTypes } = require('sequelize');
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('sub_categories_films', {
-      ID: {
+    await queryInterface.createTable('scientific_reviewers', {
+      id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
-        primaryKey: true,
+        primaryKey: true
       },
-      film_id: {
-        type: DataTypes.UUID
+      name_arabic: {
+        type: DataTypes.STRING,
+        allowNull: false,
       },
-      subcategory_id: {
-        type: DataTypes.UUID
+      name_english: {
+        type: DataTypes.STRING,
+        allowNull: true,
       },
       createdAt: {
         type: DataTypes.DATE,
@@ -32,6 +34,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('sub_categories_films');
+    await queryInterface.dropTable('scientific_reviewers');
   }
 };

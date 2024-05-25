@@ -25,7 +25,7 @@ class User extends Sequelize.Model {
     }
 
     static associate(models) {
-        this.myAssociations = this.hasMany(models.UserSeries, { foreignKey: 'user_id', as: 'Series_access' })
+        this.myAssociations = this.hasMany(models.SubscribedUser, { foreignKey: 'user_id', as: 'Subscriptions' });
     }
 
 }

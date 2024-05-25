@@ -29,9 +29,14 @@ module.exports = {
         allowNull: false,
         defaultValue: 1
       },
+      institutionId: {
+        type: DataTypes.UUID,
+        allowNull: true
+      },
       createdAt: {
         type: DataTypes.DATE,
         allowNull: false,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
       deletedAt: {
         type: DataTypes.DATE,

@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const models = require('../models')
 const constents = require('../common/constents');
-const UserSeries = models.UserSeries
+const SubscribedUser = models.SubscribedUser
 const User = models.User
 
 async function getUserByHandle(handle){
@@ -14,17 +14,17 @@ async function getUserByHandle(handle){
     let condtion = isEmail ? { email: handle } : { userName: handle };
     
     await User.findOne({
-        where: condtion, include: [{
-            model: UserSeries,
-            as: "Series_access",
-        }]
+      where: condtion, include: [{
+        model: SubscribedUser,
+        as: "Subscriptions",
+      }]
     })
-        .then(async (user) => {
-            userFound = user
-        }).catch((err) => {
-            console.log(err)
-            return null
-        })
+      .then(async (user) => {
+        userFound = user
+      }).catch((err) => {
+        console.log(err)
+        return null
+      })
     return userFound;
 }
 

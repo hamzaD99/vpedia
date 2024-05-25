@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
 
-class Category extends Sequelize.Model {
+class SubscribedUser extends Sequelize.Model {
     static init(sequelize, DataTypes) {
         return super.init(
             {
@@ -9,23 +9,25 @@ class Category extends Sequelize.Model {
                     autoIncrement: true,
                     primaryKey: true,
                 },
-                name_arabic: DataTypes.STRING,
-                name_english: DataTypes.STRING,
+                user_id: DataTypes.UUID,
+                plan_id: DataTypes.INTEGER,
                 createdAt: DataTypes.DATE,
                 deletedAt: DataTypes.DATE,
-                updatedAt: DataTypes.DATE
+                updatedAt: DataTypes.DATE,
+                expiredAt: DataTypes.DATE
             },
             {
-                tableName: 'categories',
+                tableName: 'subscribed_users',
                 sequelize,
             }
         );
     }
 
     static associate(models) {
-        this.myAssociations = this.hasMany(models.CategoryFilm, { foreignKey: 'category_id', as: 'Films' })
+        this.myAssociations = this.belongsTo(models.User, { foreignKey: 'user_id', as: 'User' });
+        this.myAssociations = this.belongsTo(models.Plan, { foreignKey: 'plan_id', as: 'Plan' });
     }
 
 }
 
-module.exports = Category;
+module.exports = SubscribedUser;

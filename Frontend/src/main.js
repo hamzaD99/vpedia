@@ -75,3 +75,16 @@ const error = (err, message="Something Went Wrong!") =>{
   store.dispatch('showSnackbar',{ message: i18n.global.t(message) })
 }
 app.config.globalProperties.$error = error
+
+const isActiveUser = (element) => {
+  if(!element || !element.Subscriptions.length) return false
+  const expiredAtDates = element.Subscriptions.map((subscription) => subscription.expiredAt)
+  if(!expiredAtDates.length) return false
+  let dateObjects = expiredAtDates.map(dateString => new Date(dateString));
+  const maxExpiredAtDate = new Date(Math.max(...dateObjects.map(date => date.getTime())));
+  const currentDate = new Date();
+  if (maxExpiredAtDate < currentDate) return false
+  return true
+}
+
+app.config.globalProperties.$filters = { isActiveUser }
