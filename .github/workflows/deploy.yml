@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - name: Stop existing Docker containers
-      run: docker-compose down || true
+      run: sudo docker-compose down || true
     
     - name: Fetch latest changes
       uses: actions/checkout@v2
@@ -27,4 +27,4 @@ jobs:
         cp ~/constents.js ~/actions-runner/_work/vpedia/vpedia/Backend/common/
         cp ~/.env ~/actions-runner/_work/vpedia/vpedia/Frontend/
     - name: Run Docker Compose
-      run: docker-compose up -d --build && docker ps
+      run: sudo docker-compose up -d --build && docker ps
