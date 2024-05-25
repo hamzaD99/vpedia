@@ -49,7 +49,6 @@
 </template>
 
 <script>
-import InputField from '@/components/InputField.vue'
 import { mapGetters } from 'vuex';
 
 export default {
@@ -61,9 +60,6 @@ export default {
       newDescription: null,
       editLoading: false
     }
-  },
-  components: {
-    InputField
   },
   mounted() {
     document.title = `${this.$t('Vpedia')}`;
