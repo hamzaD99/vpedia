@@ -12,7 +12,8 @@ module.exports.getSeries = async (req, res) => {
         }
     }
     Series.findAll({
-        where: wheres
+        where: wheres,
+        order: [order, 'ASC']
     }).then((Series) => {
         return res.send(Series);
     }).catch((err) => {

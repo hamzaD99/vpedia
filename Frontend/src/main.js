@@ -77,7 +77,7 @@ const error = (err, message="Something Went Wrong!") =>{
 app.config.globalProperties.$error = error
 
 const isActiveUser = (element) => {
-  if(!element || !element.Subscriptions.length) return false
+  if(!element || !element.Subscriptions || !element.Subscriptions.length) return false
   const expiredAtDates = element.Subscriptions.map((subscription) => subscription.expiredAt)
   if(!expiredAtDates.length) return false
   let dateObjects = expiredAtDates.map(dateString => new Date(dateString));
