@@ -15,6 +15,12 @@ jobs:
     
     - name: Fetch latest changes
       uses: actions/checkout@v2
+    
+    - name: Create common Folder
+      run: |
+        mkdir ~/actions-runner/_work/vpedia/vpedia/Backend/common/ || true
+
+
     - name: Move creds files
       run: |
         cp ~/config.json ~/actions-runner/_work/vpedia/vpedia/Backend/config/
