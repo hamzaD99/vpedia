@@ -21,7 +21,7 @@
             style="position:absolute;top:0;left:0;width:100%;height:100%;" :title="film.name_arabic"></iframe></div>
       </v-col>
       <v-col md="8" cols="12" class="mt-md-3 mt-1 text-center text-md-start d-flex flex-column align-center align-md-start" style="font-size: 18px;">
-        <span v-if="!showDescEdit" @click="showDescEdit=true" style="white-space: pre-wrap;" class="mb-4">{{ $i18n.locale === 'ar' ? film.description_arabic : film.description_english }}</span>
+        <span v-if="!showDescEdit" @click="token && user && user.roleId === 7 ? showDescEdit=true : showDescEdit=false" style="white-space: pre-wrap;" class="mb-4">{{ $i18n.locale === 'ar' ? film.description_arabic : film.description_english }}</span>
         
         <v-textarea v-if="showDescEdit" style="width: 100%;" :label="$t('Enter Description')" :rules="$rules.requiredRule" v-model="newDescription"></v-textarea>
         <div v-if="showDescEdit" class="d-flex align-center my-5" style="column-gap: 15px;">
@@ -72,7 +72,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      user: 'user'
+      user: 'user',
+      token: 'token'
     }),
     isEditDisabled(){
       return this.$rules.requiredRule.some(rule => rule(this.newDescription) !== true)

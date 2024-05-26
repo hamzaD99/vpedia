@@ -28,11 +28,12 @@
                   <v-progress-circular size="50" indeterminate color="primary" />
                 </div>
                 <div v-else v-for="film in films" :key="film.id" style="width: 100%;" class="px-md-16 px-3">
-                  <div class="d-flex justify-space-between" style="width: 100%;">
+                  <div class="d-flex" style="width: 100%;column-gap: 20px;">
                     <v-tooltip open-delay="200" :disabled="hasAccessVar" location="top" :text="$t('You don\'t have access to this film')">
                       <template v-slot:activator="{ props }">
                         <div v-bind="props" class="d-flex align-center" style="column-gap: 10px; max-width: 50%;">
                           <router-link
+                            style="text-wrap: nowrap;"
                             :style="hasAccessVar ? 'color: rgb(var(--v-theme-primary));text-decoration: none;' : 'pointer-events: none;text-decoration: none;color: black;'"
                             :to="hasAccessVar ? `/film/${film.slug}` : ''">
                             <h3 :style="$vuetify.display.mobile ? 'font-size: 16px' : ''">{{ $i18n.locale === 'ar' ? film.name_arabic : film.name_english }}</h3>
@@ -41,10 +42,10 @@
                         </div>
                       </template>
                     </v-tooltip>
-                    <div class="d-flex text-center text-md-start" style="column-gap: 10px;" :style="$vuetify.display.mobile ? 'font-size: 16px' : ''">
+                    <div class="d-flex text-center text-md-start categories-div flex-wrap" style="column-gap: 10px;row-gap: 10px;overflow: scroll;" :style="$vuetify.display.mobile ? 'font-size: 16px' : ''">
                       <router-link v-for="category in film.Categories" :key="category.id"
                         :to="`/categories?category=${category.Category.name_arabic}`" style="text-decoration: none;" target="_blank">
-                        <div :style="$vuetify.display.mobile ? 'padding: 5px' : 'padding: 10px'" style="background: gainsboro;color: black;border-radius: 5px;">{{ $i18n.locale
+                        <div :style="$vuetify.display.mobile ? 'padding: 5px' : 'padding: 10px'" style="background: gainsboro;color: black;border-radius: 5px;text-wrap:nowrap">{{ $i18n.locale
                           === 'ar' ?
                           category.Category.name_arabic : category.Category.name_english }}</div>
                       </router-link>
@@ -186,5 +187,13 @@ export default {
 <style scoped>
 :deep(.v-expansion-panel-text__wrapper){
   padding: 4px 0px;
+}
+.categories-div::-webkit-scrollbar {
+  display: none;
+}
+
+.categories-div {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 </style>

@@ -49,6 +49,7 @@ module.exports.getFilms = async (req, res) => {
     Film.findAndCountAll({
         where: wheres,
         include: includes,
+        order: [['order', 'ASC']],
         attributes: {
             exclude: ['film_link']
         },
