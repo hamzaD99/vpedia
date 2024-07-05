@@ -21,8 +21,7 @@ module.exports = {
         unique: true,
       },
       password: {
-        type: DataTypes.STRING,
-        allowNull: false
+        type: DataTypes.STRING
       },
       roleId: {
         type: DataTypes.INTEGER,

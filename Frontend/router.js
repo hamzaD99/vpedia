@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import LoginPage from './src/views/LoginPage.vue'
+import SAMLLoginPage from './src/views/SAMLLoginPage.vue'
 import FilmsPage from './src/views/FilmsPage.vue'
 import HomePage from './src/views/HomePage.vue'
 import AboutUsPage from './src/views/AboutUsPage.vue'
@@ -16,6 +17,12 @@ const routes = [
     path: '/login',
     name: 'LoginPage',
     component: LoginPage,
+    meta: { title: `${i18n.global.t('Login')} - ${i18n.global.t('Vpedia')}`, middleware: isGuest }
+  },
+  {
+    path: '/saml-login',
+    name: 'SAMLLoginPage',
+    component: SAMLLoginPage,
     meta: { title: `${i18n.global.t('Login')} - ${i18n.global.t('Vpedia')}`, middleware: isGuest }
   },
   {

@@ -13,6 +13,7 @@ class User extends Sequelize.Model {
                 email: DataTypes.STRING,
                 userName: DataTypes.STRING,
                 password: DataTypes.STRING,
+                institutionId: DataTypes.UUID,
                 roleId: DataTypes.INTEGER,
                 createdAt: DataTypes.DATE,
                 deletedAt: DataTypes.DATE
@@ -26,6 +27,7 @@ class User extends Sequelize.Model {
 
     static associate(models) {
         this.myAssociations = this.hasMany(models.SubscribedUser, { foreignKey: 'user_id', as: 'Subscriptions' });
+        this.myAssociations = this.belongsTo(models.Institution, { foreignKey: 'institutionId', as: 'Institution' });
     }
 
 }
