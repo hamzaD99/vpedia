@@ -1,4 +1,5 @@
 
 module.exports.sucessLogin = async (req, res, next) => {
-    return res.status(200).send(req.user)
+    res.status(200).send(req.user)
+    return res.redirect(`https://vpedia.info/saml-login?token=${req.user.token}`);
 }

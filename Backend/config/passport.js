@@ -80,8 +80,8 @@ function initialize(passport) {
   }
 
   const findProvider = async (request, done) => {
-    console.log(request)
     const issuer = request.query.issuer;
+    console.log(issuer)
     if (!issuer) {
       console.error('Issuer is required');
       return done(new Error('Issuer is required'));
