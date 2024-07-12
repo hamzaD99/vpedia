@@ -20,7 +20,7 @@ const routes = [
     meta: { title: `${i18n.global.t('Login')} - ${i18n.global.t('Vpedia')}`, middleware: isGuest }
   },
   {
-    path: '/saml-login',
+    path: '/saml-login-fe',
     name: 'SAMLLoginPage',
     component: SAMLLoginPage,
     meta: { title: `${i18n.global.t('Login')} - ${i18n.global.t('Vpedia')}`, middleware: isGuest, hideHeaderFooter: true }

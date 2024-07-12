@@ -80,9 +80,6 @@
 import { mapGetters } from 'vuex';
 export default {
   name: 'NavBar',
-  components: {
-
-  },
   computed: {
     ...mapGetters({
       token: 'token',
