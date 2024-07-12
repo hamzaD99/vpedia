@@ -23,7 +23,7 @@ const routes = [
     path: '/saml-login',
     name: 'SAMLLoginPage',
     component: SAMLLoginPage,
-    meta: { title: `${i18n.global.t('Login')} - ${i18n.global.t('Vpedia')}`, middleware: isGuest }
+    meta: { title: `${i18n.global.t('Login')} - ${i18n.global.t('Vpedia')}`, middleware: isGuest, hideHeaderFooter: true }
   },
   {
     path: '/admin',
