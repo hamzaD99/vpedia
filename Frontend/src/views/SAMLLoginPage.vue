@@ -1,5 +1,5 @@
 <template>
-  <span>{{samlResponse}}</span>
+  <span>hello</span>
 </template>
 
 <script>
